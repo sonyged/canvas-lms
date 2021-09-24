@@ -1006,6 +1006,7 @@ CanvasRails::Application.routes.draw do
       get 'courses/:course_id/users/:id', action: :user, as: 'course_user'
       get 'courses/:course_id/users/:user_id/progress', action: :user_progress
       get 'courses/:course_id/content_share_users', action: :content_share_users, as: 'course_content_share_users'
+      get 'courses/:course_id/content_share_students', action: :content_share_students, as: 'course_content_share_students'
       get 'courses/:course_id/activity_stream', action: :activity_stream, as: 'course_activity_stream'
       get 'courses/:course_id/activity_stream/summary', action: :activity_stream_summary, as: 'course_activity_stream_summary'
       get 'courses/:course_id/bulk_user_progress', action: :bulk_user_progress, as: 'course_bulk_user_progress'
@@ -2303,6 +2304,10 @@ CanvasRails::Application.routes.draw do
       delete 'users/:user_id/content_shares/:id', action: :destroy
       post 'users/:user_id/content_shares/:id/add_users', action: :add_users
       put 'users/:user_id/content_shares/:id', action: :update
+    end
+
+    scope(controller: :user_tokens) do
+      post 'user_tokens/:user_id', action: :create
     end
 
     scope(:controller => :csp_settings) do

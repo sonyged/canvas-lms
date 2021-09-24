@@ -62,6 +62,7 @@ import 'jqueryui/sortable'
 import '@canvas/rails-flash-notifications'
 import DirectShareCourseTray from '@canvas/direct-sharing/react/components/DirectShareCourseTray'
 import DirectShareUserModal from '@canvas/direct-sharing/react/components/DirectShareUserModal'
+import DirectShareStudentModal from '@canvas/direct-sharing/react/components/DirectShareStudentModal'
 import mathml from 'mathml'
 
 function scrollTo($thing, time = 500) {
@@ -2764,6 +2765,21 @@ $(document).ready(function() {
     )
   }
 
+  function renderGenerateUrlModal(open, contentSelection, returnFocusTo) {
+    ReactDOM.render(
+      <DirectShareStudentModal
+        open={open}
+        sourceCourseId={ENV.COURSE_ID}
+        contentShare={contentSelection}
+        onDismiss={() => {
+          renderGenerateUrlModal(false, contentSelection, returnFocusTo)
+          returnFocusTo.focus()
+        }}
+      />,
+      document.getElementById('direct-share-mount-point')
+    )
+  }
+
   $('.module_copy_to').live('click', event => {
     event.preventDefault()
     const moduleId = $(event.target)
@@ -2788,6 +2804,19 @@ $(document).ready(function() {
       .closest('ul')
       .prev('.al-trigger')
     renderSendToTray(true, selection, returnFocusTo)
+  })
+
+  $('.module_generate_url_for_student').live('click', event => {
+    const moduleId = $(event.target)
+      .closest('.context_module')
+      .data('module-id')
+      .toString()
+    event.preventDefault()
+    const selection = {content_type: 'module', content_id: moduleId}
+    const returnFocusTo = $(event.target)
+      .closest('ul')
+      .prev('.al-trigger')
+    renderGenerateUrlModal(true, selection, returnFocusTo)
   })
 
   $('.module_item_copy_to').live('click', event => {

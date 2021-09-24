@@ -29,6 +29,8 @@ export const CONTENT_SHARE_TYPES = [
   'module_item'
 ]
 
+export const STUDENT_CONTENT_SHARE_TYPES = ['course', 'module', 'quiz']
+
 const contentShareShape = shape({
   id: string.isRequired,
   name: string.isRequired,

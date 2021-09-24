@@ -29,6 +29,7 @@ import {initializePlanner, renderToDoSidebar} from '@instructure/canvas-planner'
 import {showFlashAlert} from '@canvas/alerts/react/FlashAlert'
 import apiUserContent from '@canvas/util/jquery/apiUserContent'
 import * as apiClient from '@canvas/courses/courseAPIClient'
+import DirectShareStudentModal from '@canvas/direct-sharing/react/components/DirectShareStudentModal'
 
 const defaultViewStore = createStore({
   selectedDefaultView: ENV.COURSE.default_view,
@@ -98,6 +99,22 @@ const addToDoSidebar = parent => {
   renderToDoSidebar(parent)
 }
 
+function openGenerateUrl(event, open = true) {
+  if (event) event.preventDefault()
+  ReactDOM.render(
+    <DirectShareStudentModal
+      open={open}
+      courseId={ENV.COURSE.id}
+      contentShare={{content_type: 'course', content_id: ENV.COURSE.id}}
+      onDismiss={() => {
+        openGenerateUrl(null, false)
+        $('.al-trigger').focus()
+      }}
+    />,
+    document.getElementById('direct-share-mount-point')
+  )
+}
+
 $(() => {
   $('#course_status_form').submit(e => {
     const input = e.target.elements.namedItem('course[event]')
@@ -147,4 +164,6 @@ $(() => {
   if (todo_container) {
     addToDoSidebar(todo_container)
   }
+
+  $('.generate-url-for-student').click(openGenerateUrl)
 })

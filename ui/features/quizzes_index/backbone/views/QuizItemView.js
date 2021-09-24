@@ -33,6 +33,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import DirectShareCourseTray from '@canvas/direct-sharing/react/components/DirectShareCourseTray'
 import DirectShareUserModal from '@canvas/direct-sharing/react/components/DirectShareUserModal'
+import DirectShareStudentModal from '@canvas/direct-sharing/react/components/DirectShareStudentModal'
 
 export default class ItemView extends Backbone.View {
   static initClass() {
@@ -53,6 +54,7 @@ export default class ItemView extends Backbone.View {
       'click .migrate': 'migrateQuiz',
       'click .quiz-copy-to': 'copyQuizTo',
       'click .quiz-send-to': 'sendQuizTo',
+      'click .quiz-generate-url-to-student': 'generateUrlForStudent',
       'click .duplicate_assignment': 'onDuplicate',
       'click .duplicate-failed-retry': 'onDuplicateFailedRetry',
       'click .migrate-failed-retry': 'onMigrateFailedRetry',
@@ -238,6 +240,29 @@ export default class ItemView extends Backbone.View {
   sendQuizTo(ev) {
     ev.preventDefault()
     this.renderSendToTray(true)
+  }
+
+  renderGenerateUrlModal(open) {
+    const quizId = this.model.get('id')
+    const contentType = 'quiz'
+
+    ReactDOM.render(
+      <DirectShareStudentModal
+        open={open}
+        sourceCourseId={ENV.COURSE_ID}
+        contentShare={{content_type: contentType, content_id: quizId}}
+        onDismiss={() => {
+          this.renderGenerateUrlModal(false)
+          return setTimeout(() => this.$settingsButton.focus(), 100)
+        }}
+      />,
+      document.getElementById('direct-share-mount-point')
+    )
+  }
+
+  generateUrlForStudent(ev) {
+    ev.preventDefault()
+    this.renderGenerateUrlModal(true)
   }
 
   observeModel() {

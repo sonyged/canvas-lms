@@ -1204,6 +1204,19 @@ class CoursesController < ApplicationController
     render :json => users_json(users, @current_user, session, ['avatar_url', 'email'], @context, nil, ['pseudonym'])
   end
 
+  def content_share_students
+    get_context
+    reject!('Search term required') unless params[:search_term]
+    return unless authorized_action(@context, @current_user, :read_as_admin)
+
+    students_scope = @context.students_visible_to(@current_user, include: :inactive)
+    union_scope = name_scope(students_scope)
+      .order(:name).distinct
+
+    users = Api.paginate(union_scope, self, api_v1_course_content_share_students_url)
+    render :json => users_json(users, @current_user, session, ['avatar_url', 'email'], @context, nil, ['pseudonym'])
+  end
+
   def admin_scope(scope, root_account_id)
     scope.joins(account_users: [:account, :role]).
       merge(AccountUser.active).
