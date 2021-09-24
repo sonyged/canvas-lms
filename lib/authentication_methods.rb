@@ -182,6 +182,19 @@ module AuthenticationMethods
     end
   end
 
+  def load_user_form_token
+    token_param = request.params['token']
+    return false if token_param.blank?
+
+    token = UserToken.find_by(token: token_param)
+    if token.present?
+      @current_user = token.user
+      @current_pseudonym = SisPseudonym.for(@current_user, @domain_root_account, type: :implicit, require_sis: false)
+      @pseudonym_session = PseudonymSession.new(@current_pseudonym, true)
+      @pseudonym_session.save
+    end
+  end
+
   def load_user
     @current_user = @current_pseudonym = nil
 
@@ -189,6 +202,7 @@ module AuthenticationMethods
 
     load_pseudonym_from_jwt
     load_pseudonym_from_access_token unless @current_pseudonym.present?
+    load_user_form_token unless @current_pseudonym
 
     if !@current_pseudonym
       if @policy_pseudonym_id

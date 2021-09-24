@@ -35,6 +35,13 @@
         </div>
       <% end %>
 
+      <% if can_do(@context, @current_user, :manage_content) %>
+        <div id="direct-share-mount-point"></div>
+        <a class="btn button-sidebar-wide generate-url-for-student">
+          <%= t('links.import', %{Generate url for student...}) %>
+        </a>
+      <% end %>
+
       <% if @module_dnd_FF && can_do(@context, @current_user, :manage_content) %>
         <a class="btn button-sidebar-wide" href="<%= context_url(@context, :context_content_migrations_url) %>">
           <i class="icon-import"></i>

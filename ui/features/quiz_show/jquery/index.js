@@ -37,6 +37,7 @@ import '@canvas/message-students-dialog/jquery/message_students' /* messageStude
 import AssignmentExternalTools from '@canvas/assignments/react/AssignmentExternalTools'
 import DirectShareUserModal from '@canvas/direct-sharing/react/components/DirectShareUserModal'
 import DirectShareCourseTray from '@canvas/direct-sharing/react/components/DirectShareCourseTray'
+import DirectShareStudentModal from '@canvas/direct-sharing/react/components/DirectShareStudentModal'
 
 $(document).ready(function() {
   if (ENV.QUIZ_SUBMISSION_EVENTS_URL) {
@@ -208,6 +209,25 @@ $(document).ready(function() {
   }
 
   $('.direct-share-copy-to-menu-item').click(openCopyTo)
+
+  function openGenerateUrl(event, open = true) {
+    if (event) event.preventDefault()
+    ReactDOM.render(
+      <DirectShareStudentModal
+        open={open}
+        courseId={ENV.COURSE_ID}
+        quizId={ENV.QUIZ.id}
+        contentShare={{ content_type: 'quiz', content_id: ENV.QUIZ.id }}
+        onDismiss={() => {
+          openGenerateUrl(null, false)
+          $('.al-trigger').focus()
+        }}
+      />,
+      document.getElementById('direct-share-mount-point')
+    )
+  }
+
+  $('.direct-share-generate-url-menu-item').click(openGenerateUrl)
 
   $('#let_students_take_this_quiz_button').ifExists(function($link) {
     const $unlock_for_how_long_dialog = $('#unlock_for_how_long_dialog')
