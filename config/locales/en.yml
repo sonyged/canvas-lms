@@ -355,3 +355,124 @@ en:
       student_support: 'NetAcad Support - Student'
       student_support_description: 'Your Instructor should be your first point of contact. They can answer your Networking Academy questions or contact the support desk for you. You can contact your instructor by using the Inbox feature.'
       support_desk_livechat: 'Support Desk Live Chat'
+  enums:
+    "quizzes/quiz":
+      subjects:
+        math: Math
+        japanese: Japanese
+        english: English
+        science: Science
+        social_studies: Social Studies
+        others: Others
+      grades:
+        g1: G1
+        g2: G2
+        g3: G3
+        g4: G4
+        g5: G5
+        g6: G6
+        g7: G7
+        g8: G8
+        g9: G9
+      units:
+        math_g1_number_construction_representation: "数の構成と表し方"
+        math_g1_addition_subtraction: "たし算・ひき算"
+        math_g1_shape_basic_understanding: "図形についての基礎理解（方向・位置・形）"
+        math_g1_measurement_basic_understanding: "量の測定についての基礎理解（量の比較）"
+        math_g1_read_time: "時刻の読み方"
+        math_g1_quantitative_expression_by_image_diagram: "絵や図を用いた数量表現"
+        math_g2_number_construction_representation: "数の構成と表し方"
+        math_g2_addition_subtraction: "たし算・ひき算"
+        math_g2_multiplication: "かけ算"
+        math_g2_triangle_quadrilateral_box: "三角形・四角形・箱"
+        math_g2_length_volume: "長さ・かさ"
+        math_g2_unit_time: "時間の単位"
+        math_g2_simple_graph_table: "簡単なグラフや表"
+        math_g3_number_representation: "数の表し方"
+        math_g3_addition_subtraction: "たし算・ひき算"
+        math_g3_multiplication: "かけ算"
+        math_g3_division: "わり算"
+        math_g3_decimal_representation_addition_subtraction: "小数の表し方・たし算・ひき算"
+        math_g3_fraction_representation_addition_subtraction: "分数の表し方・たし算・ひき算"
+        math_g3_quantity_relationship: "数量の関係"
+        math_g3_abacus: "そろばん"
+        math_g3_specific-triangles_angle_circle_sphere: "二等辺三角形・正三角形・角・円・球"
+        math_g3_unit_length_weight: "長さや重さの単位"
+        math_g3_time_duration_determination: "時刻や時間を求める"
+        math_g3_organizing_data_tables_bar_charts: "データの分類整理・表・棒グラフ"
+        math_g4_integer_representation: "整数の表し方"
+        math_g4_round_number_rounding: "概数と四捨五入"
+        math_g4_integer_division: "整数の除法"
+        math_g4_decimal_structure_calculation: "小数の仕組みとその計算"
+        math_g4_fractions_with_the_same_denominator_addition_subtraction: "同分母の分数の加法・減法"
+        math_g4_expression_relationship_between_quantities: "数量の関係を表す式"
+        math_g4_properties_four_arithmetic_operations: "四則に関して成り立つ性質"
+        math_g4_abacus: "そろばん"
+        math_g4_two_quantities_changing_with_each_other: "伴って変わる二つの数量"
+        math_g4_proroportion_simple_case: "簡単な場合についての割合"
+        math_g4_parallel_perpendicular_parallelograms_rhombuses_trapezoids: "直線の並行や垂直・平行四辺形・ひし形・台形"
+        math_g4_cubes_rectangles_floor_plans_development_diagrams: "立方体・直方体・見取図・展開図"
+        math_g4_expression_ position_of_object: "ものの位置の表し方"
+        math_g4_plane_figure_area: "平面図形の面積"
+        math_g4_angle_size_measurement: "角の大きさと測定"
+        math_g4_organizing_data_from_two_viewpoints,_line_graphs: "2観点でのデータの分類整理・折れ線グラフ"
+        math_g5_integer_property: "整数の性質"
+        math_g5_integer_decimal_notation: "整数・小数の記数法"
+        math_g5_decimal_multiplication_division: "小数の乗法、除法"
+        math_g5_fraction_meaning_expression: "分数の意味と表し方"
+        math_g5_fraction_addition_subtraction: "分数の加法、減法"
+        math_g5_expression_quantity_relationship: "数量の関係を表す式"
+        math_g5_relationship_two_quantities_changing_with_each_other: "伴って変わる二つの数量の関係"
+        math_g5_proportion_two_dissimilar_quantities: "異種の二つの量の割合"
+        math_g5_percentage: "割合（百分率）"
+        math_g5_plane_figure_property: "平面図形の性質"
+        math_g5_spatial_figure_property: "立体図形の性質"
+        math_g5_plane_figure_area: "平面図形の面積"
+        math_g5_spatial_figure_volume: "立体図形の体積"
+        math_g5_pie_chart_band_graph: "円グラフや帯グラフ"
+        math_g5_average: "測定値の平均"
+        math_g6_fraction_multiplication_division: "分数の乗法、除法"
+        math_g6_expression_with_letters: "文字を用いた式"
+        math_g6_proportion: "比例"
+        math_g6_ratio: "比"
+        math_g6_scaled_enlarged_drawing_symmetrical_figure: "縮図や拡大図、対称な図形"
+        math_g6_approximate_shape_area: "概形とおよその面積"
+        math_g6_circle_area: "円の面積"
+        math_g6_prism_cylinder_volume: "角柱及び円柱の体積"
+        math_g6_data_discussion: "データの考察"
+        math_g6_possible_case: "起こりうる場合"
+        math_g7_positive_negative_number: "正の数・負の数"
+        math_g7_expression_with_letters: "文字を用いた式"
+        math_g7_linear_equation: "一元一次方程式"
+        math_g7_plane_figure: "平面図形"
+        math_g7_spatial_figure: "空間図形"
+        math_g7_proportion_inverse_proportion: "比例、反比例"
+        math_g7_trends_data_distribution: "データの分布の傾向"
+        math_g7_probability_many observations_trials: "多数の観察や多数回の試行によって得られる確率"
+        math_g8_four_arithmetic_operations_including_letters: "文字を用いた式の四則演算"
+        math_g8_simultaneous binary linear equations: "連立二元一次方程式"
+        math_g8_property_plane_figure_parallel_line: "基本的な平面図形と平行線の性質"
+        math_g8_congruence_of_figures: "図形の合同"
+        math_g8_linear_function: "一次関数"
+        math_g8_comparison_distribution: "データの分布の比較"
+        math_g8_probability_number_of_cases: "場合の数を基にして得られる確率"
+        math_g9_square_root: "平方根"
+        math_g9_expansion_factorization_expression: "式の展開と因数分解"
+        math_g9_quadratic_equation: "二次方程式"
+        math_g9_similarity_of_figures: "図形の相似"
+        math_g9_circumference_angle_central_angle: "円周角と中心角"
+        math_g9_theorem_of_three_squares: "三平方の定理"
+        math_g9_y=ax^2: "関数y=ax^2"
+        math_g9_sample_survey: "標本調査"
+      difficulties:
+        easy: Easy
+        normal: Normal
+        difficult: Difficult
+
+  activerecord:
+    attributes:
+      "quizzes/quiz":
+        subject:  Subject
+        grade: Grade
+        unit: Unit
+        difficulty: Difficulty

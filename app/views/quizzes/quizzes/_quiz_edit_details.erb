@@ -77,6 +77,34 @@ content_is_locked = !!js_env.dig(:MASTER_COURSE_DATA, "is_master_course_child_co
           </div>
         </div>
 
+        <div class="control-group">
+          <label class="control-label" for="quiz_subject"><%= Quizzes::Quiz.human_attribute_name(:subject) %></label>
+          <div class="controls">
+            <%= select_tag "quiz[subject]", options_for_select(enum_options_for_select(Quizzes::Quiz, :subject), @quiz.subject), include_blank: true, id: 'quiz_subject' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="quiz_grade"><%= Quizzes::Quiz.human_attribute_name(:grade) %></label>
+          <div class="controls">
+            <%= select_tag "quiz[grade]", options_for_select(enum_options_for_select(Quizzes::Quiz, :grade), @quiz.grade), include_blank: true, id: 'quiz_grade' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="quiz_unit"><%= Quizzes::Quiz.human_attribute_name(:unit) %></label>
+          <div class="controls">
+            <%= select_tag "quiz[unit]", options_for_select(enum_options_for_select(Quizzes::Quiz, :unit), @quiz.unit), include_blank: true, id: 'quiz_unit' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" for="quiz_difficulty"><%= Quizzes::Quiz.human_attribute_name(:difficulty) %></label>
+          <div class="controls">
+            <%= select_tag "quiz[difficulty]", options_for_select(enum_options_for_select(Quizzes::Quiz, :difficulty), @quiz.difficulty), include_blank: true, id: 'quiz_difficulty' %>
+          </div>
+        </div>
+
         <div class="control-group" id="quiz_points_possible" style="<%= hidden unless @quiz.graded_survey? %>">
           <%= label :quiz, :points_possible, :quiz_score, :en => "Score", :class => 'control-label' %>
             <div class="controls">

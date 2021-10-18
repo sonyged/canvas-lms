@@ -53,6 +53,10 @@ module Api::V1::Quiz
       disable_timer_autosubmission
       title
       unlock_at
+      subject
+      grade
+      unit
+      difficulty
     ) + [{'hide_results' => ArbitraryStrongishParams::ANYTHING}] # because sometimes this is a hash :/
     ).freeze
   }.freeze

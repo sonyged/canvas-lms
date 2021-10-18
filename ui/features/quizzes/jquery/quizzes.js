@@ -4979,6 +4979,35 @@ $(document).ready(function() {
       }
     })
   }
+
+  function showQuizUnitOptions() {
+    const subject = $('#quiz_subject').val()
+
+    if(subject !== 'math') {
+      $('#quiz_unit').val('')
+      $('#quiz_unit').closest('.control-group').hide()
+    } else {
+      $('#quiz_unit').closest('.control-group').show()
+    }
+    const grade = $('#quiz_grade').val()
+    const selected_unit = $('#quiz_unit').val()
+
+    const all_units = $('#quiz_unit option')
+    const reg = new RegExp(`^${subject}_${grade}`);
+    for(let unit of all_units.get()) {
+      if(!reg.test(unit.value)) {
+        $(unit).hide()
+        if(unit.value === selected_unit) $('#quiz_unit').val('')
+      } else {
+        $(unit).show()
+      }
+    }
+  }
+  showQuizUnitOptions()
+
+  $('#quiz_subject, #quiz_grade').on('change', event => {
+    showQuizUnitOptions()
+  })
 })
 
 $.fn.multipleAnswerSetsQuestion = function() {
