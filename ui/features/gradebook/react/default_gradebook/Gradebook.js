@@ -2011,6 +2011,7 @@ class Gradebook {
       gradebookImportUrl: this.options.gradebook_import_url,
       currentUserId: this.options.currentUserId,
       gradebookExportUrl: this.options.export_gradebook_csv_url,
+      gradebookExportXlsxUrl: this.options.export_gradebook_xlsx_url,
       postGradesLtis: this.postGradesLtis,
       postGradesFeature: {
         enabled: this.options.post_grades_feature != null && !this.disablePostGradesFeature,
