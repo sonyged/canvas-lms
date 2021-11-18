@@ -250,6 +250,11 @@
 
             <% if can_do(@quiz, @current_user, :manage) %>
               <%= render :partial => 'direct_share_buttons' %>
+              <li role="presentation">
+                <a href="#" class="direct-share-generate-url-menu-item">
+                  <i aria-hidden="true" class="icon-user"></i><%= t("Generate url for student...") %>
+                </a>
+              </li>
             <% end %>
 
             <%= external_tools_menu_items((@quiz_menu_tools || []), {link_class: "menu_tool_link", settings_key: :quiz_menu, in_list: true, url_params: {:quizzes => [@quiz.id]}}) %>

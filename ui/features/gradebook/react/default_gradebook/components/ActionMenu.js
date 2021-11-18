@@ -49,6 +49,7 @@ class ActionMenu extends React.Component {
 
     currentUserId: string.isRequired,
     gradebookExportUrl: string.isRequired,
+    gradebookExportXlsxUrl: string,
 
     lastExport: shape({
       progressId: string.isRequired,
@@ -154,6 +155,10 @@ class ActionMenu extends React.Component {
 
         $.flashError(I18n.t('Gradebook Export Failed: %{reason}', {reason}))
       })
+  }
+
+  handleExportXlsx() {
+    ActionMenu.gotoUrl(this.props.gradebookExportXlsxUrl)
   }
 
   handleImport() {
@@ -326,6 +331,15 @@ class ActionMenu extends React.Component {
             {this.exportInProgress() ? I18n.t('Export in progress') : I18n.t('Export')}
           </span>
         </Menu.Item>
+        {this.props.gradebookExportXlsxUrl && (
+          <Menu.Item
+            onSelect={() => {
+              this.handleExportXlsx()
+            }}
+          >
+            <span data-menu-id="export-xlsx">{I18n.t('Export xlsx')}</span>
+          </Menu.Item>
+        )}
 
         {[...this.renderPreviousExports()]}
       </Menu>

@@ -37,8 +37,9 @@ import '@canvas/message-students-dialog/jquery/message_students' /* messageStude
 import AssignmentExternalTools from '@canvas/assignments/react/AssignmentExternalTools'
 import DirectShareUserModal from '@canvas/direct-sharing/react/components/DirectShareUserModal'
 import DirectShareCourseTray from '@canvas/direct-sharing/react/components/DirectShareCourseTray'
+import DirectShareStudentModal from '@canvas/direct-sharing/react/components/DirectShareStudentModal'
 
-$(document).ready(function() {
+$(document).ready(function () {
   if (ENV.QUIZ_SUBMISSION_EVENTS_URL) {
     QuizLogAuditingEventDumper(true)
   }
@@ -67,12 +68,10 @@ $(document).ready(function() {
     inputMethods.setWidths()
   }
 
-  $('form.edit_quizzes_quiz').on('submit', function(e) {
+  $('form.edit_quizzes_quiz').on('submit', function (e) {
     e.preventDefault()
     e.stopImmediatePropagation()
-    $(this)
-      .find('.loading')
-      .removeClass('hidden')
+    $(this).find('.loading').removeClass('hidden')
     const data = $(this).serializeArray()
     const url = $(this).attr('action')
     $.ajax({
@@ -80,14 +79,12 @@ $(document).ready(function() {
       data,
       type: 'POST',
       success() {
-        $('.edit_quizzes_quiz')
-          .parents('.alert')
-          .hide()
+        $('.edit_quizzes_quiz').parents('.alert').hide()
       }
     })
   })
 
-  $('.delete_quiz_link').click(function(event) {
+  $('.delete_quiz_link').click(function (event) {
     event.preventDefault()
     let deleteConfirmMessage = I18n.t(
       'confirms.delete_quiz',
@@ -100,8 +97,7 @@ $(document).ready(function() {
         I18n.t(
           'confirms.delete_quiz_submissions_warning',
           {
-            one:
-              'Warning: 1 student has already taken this quiz. If you delete it, any completed submissions will be deleted and no longer appear in the gradebook.',
+            one: 'Warning: 1 student has already taken this quiz. If you delete it, any completed submissions will be deleted and no longer appear in the gradebook.',
             other:
               'Warning: %{count} students have already taken this quiz. If you delete it, any completed submissions will be deleted and no longer appear in the gradebook.'
           },
@@ -209,7 +205,26 @@ $(document).ready(function() {
 
   $('.direct-share-copy-to-menu-item').click(openCopyTo)
 
-  $('#let_students_take_this_quiz_button').ifExists(function($link) {
+  function openGenerateUrl(event, open = true) {
+    if (event) event.preventDefault()
+    ReactDOM.render(
+      <DirectShareStudentModal
+        open={open}
+        courseId={ENV.COURSE_ID}
+        quizId={ENV.QUIZ.id}
+        contentShare={{content_type: 'quiz', content_id: ENV.QUIZ.id}}
+        onDismiss={() => {
+          openGenerateUrl(null, false)
+          $('.al-trigger').focus()
+        }}
+      />,
+      document.getElementById('direct-share-mount-point')
+    )
+  }
+
+  $('.direct-share-generate-url-menu-item').click(openGenerateUrl)
+
+  $('#let_students_take_this_quiz_button').ifExists(function ($link) {
     const $unlock_for_how_long_dialog = $('#unlock_for_how_long_dialog')
 
     $link.click(() => {
@@ -259,9 +274,7 @@ $(document).ready(function() {
         .text(I18n.t('buttons.publishing', 'Publishing...'))
     },
     success(data) {
-      $(this)
-        .find('button')
-        .text(I18n.t('buttons.already_published', 'Published!'))
+      $(this).find('button').text(I18n.t('buttons.already_published', 'Published!'))
       location.reload()
     }
   })
@@ -270,7 +283,7 @@ $(document).ready(function() {
   const model = new Quiz($.extend(ENV.QUIZ, {unpublishable: !$el.hasClass('disabled')}))
   const view = new PublishButtonView({model, el: $el})
 
-  const refresh = function() {
+  const refresh = function () {
     location.href = location.href
   }
   view.on('publish', refresh)

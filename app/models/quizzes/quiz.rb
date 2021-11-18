@@ -23,6 +23,99 @@ class Quizzes::Quiz < ActiveRecord::Base
   extend RootAccountResolver
   self.table_name = 'quizzes'
 
+  SUBJECTS = %w[math japanese english science social_studies others]
+  GRADES = %w[g1 g2 g3 g4 g5 g6 g7 g8 g9]
+  UNITS = %w[math_g1_number_construction_representation
+    math_g1_addition_subtraction
+    math_g1_shape_basic_understanding
+    math_g1_measurement_basic_understanding
+    math_g1_read_time
+    math_g1_quantitative_expression_by_image_diagram
+    math_g2_number_construction_representation
+    math_g2_addition_subtraction
+    math_g2_multiplication
+    math_g2_triangle_quadrilateral_box
+    math_g2_length_volume
+    math_g2_unit_time
+    math_g2_simple_graph_table
+    math_g3_number_representation
+    math_g3_addition_subtraction
+    math_g3_multiplication
+    math_g3_division
+    math_g3_decimal_representation_addition_subtraction
+    math_g3_fraction_representation_addition_subtraction
+    math_g3_quantity_relationship
+    math_g3_abacus
+    math_g3_specific-triangles_angle_circle_sphere
+    math_g3_unit_length_weight
+    math_g3_time_duration_determination
+    math_g3_organizing_data_tables_bar_charts
+    math_g4_integer_representation
+    math_g4_round_number_rounding
+    math_g4_integer_division
+    math_g4_decimal_structure_calculation
+    math_g4_fractions_with_the_same_denominator_addition_subtraction
+    math_g4_expression_relationship_between_quantities
+    math_g4_properties_four_arithmetic_operations
+    math_g4_abacus
+    math_g4_two_quantities_changing_with_each_other
+    math_g4_proroportion_simple_case
+    math_g4_parallel_perpendicular_parallelograms_rhombuses_trapezoids
+    math_g4_cubes_rectangles_floor_plans_development_diagrams
+    math_g4_expression_ position_of_object
+    math_g4_plane_figure_area
+    math_g4_angle_size_measurement
+    math_g4_organizing_data_from_two_viewpoints,_line_graphs
+    math_g5_integer_property
+    math_g5_integer_decimal_notation
+    math_g5_decimal_multiplication_division
+    math_g5_fraction_meaning_expression
+    math_g5_fraction_addition_subtraction
+    math_g5_expression_quantity_relationship
+    math_g5_relationship_two_quantities_changing_with_each_other
+    math_g5_proportion_two_dissimilar_quantities
+    math_g5_percentage
+    math_g5_plane_figure_property
+    math_g5_spatial_figure_property
+    math_g5_plane_figure_area
+    math_g5_spatial_figure_volume
+    math_g5_pie_chart_band_graph
+    math_g5_average
+    math_g6_fraction_multiplication_division
+    math_g6_expression_with_letters
+    math_g6_proportion
+    math_g6_ratio
+    math_g6_scaled_enlarged_drawing_symmetrical_figure
+    math_g6_approximate_shape_area
+    math_g6_circle_area
+    math_g6_prism_cylinder_volume
+    math_g6_data_discussion
+    math_g6_possible_case
+    math_g7_positive_negative_number
+    math_g7_expression_with_letters
+    math_g7_linear_equation
+    math_g7_plane_figure
+    math_g7_spatial_figure
+    math_g7_proportion_inverse_proportion
+    math_g7_trends_data_distribution
+    math_g7_probability_many observations_trials
+    math_g8_four_arithmetic_operations_including_letters
+    math_g8_simultaneous binary linear equations
+    math_g8_property_plane_figure_parallel_line
+    math_g8_congruence_of_figures
+    math_g8_linear_function
+    math_g8_comparison_distribution
+    math_g8_probability_number_of_cases
+    math_g9_square_root
+    math_g9_expansion_factorization_expression
+    math_g9_quadratic_equation
+    math_g9_similarity_of_figures
+    math_g9_circumference_angle_central_angle
+    math_g9_theorem_of_three_squares
+    math_g9_y=ax^2
+    math_g9_sample_survey]
+  DIFFICULTIES = %w[easy normal difficult]
+
   include Workflow
   include HasContentTags
   include CopyAuthorizedLinks
@@ -37,6 +130,11 @@ class Quizzes::Quiz < ActiveRecord::Base
 
   attr_readonly :context_id, :context_type
   attr_accessor :notify_of_update
+
+  enum subject: SUBJECTS, _prefix: true
+  enum grade: GRADES, _prefix: true
+  enum unit: UNITS, _prefix: true
+  enum difficulty: DIFFICULTIES, _prefix: true
 
   has_many :quiz_questions, -> { order(:position) }, dependent: :destroy, class_name: 'Quizzes::QuizQuestion', inverse_of: :quiz
   has_many :quiz_submissions, :dependent => :destroy, :class_name => 'Quizzes::QuizSubmission'

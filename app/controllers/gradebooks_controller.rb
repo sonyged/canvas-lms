@@ -417,6 +417,7 @@ class GradebooksController < ApplicationController
       enrollments_url: custom_course_enrollments_api_url(per_page: per_page),
       enrollments_with_concluded_url: custom_course_enrollments_api_url(include_concluded: true, per_page: per_page),
       export_gradebook_csv_url: course_gradebook_csv_url,
+      export_gradebook_xlsx_url: export_xlsx_course_gradebook_url(@context, format: :xlsx),
       final_grade_override_enabled: @context.feature_enabled?(:final_grades_override),
       load_assignments_by_grading_period_enabled: Account.site_admin.feature_enabled?(:gradebook_load_assignments_by_grading_period),
       gradebook_column_order_settings: @current_user.get_preference(:gradebook_column_order, @context.global_id),
@@ -1123,7 +1124,77 @@ class GradebooksController < ApplicationController
   end
   helper_method :student_groups?
 
+  def export_xlsx
+    return unless authorized_action(@context, @current_user, :manage_grades)
+
+    respond_to do |format|
+      format.xlsx do
+        workbook = RubyXL::Workbook.new
+        sheet = workbook.worksheets[0]
+        headers = [
+          'user id',
+          'datetime',
+          'course',
+          'module',
+          'content type',
+          'content name',
+          'quiz type',
+          'subject',
+          'grade',
+          'unit',
+          'difficulty',
+          'answer',
+          'result',
+          'duration',
+        ]
+        headers.each_with_index do |label, i|
+          set_value(sheet, i, 0, label)
+        end
+
+        student_ids = GradebookUserIds.new(@context, @current_user).user_ids
+
+        row_num = 1
+        @context.quizzes.each do |quiz|
+          quiz.quiz_submissions.where(user_id: student_ids).each_with_index do |submission|
+            duration = (submission.finished_at && submission.started_at) ? (submission.finished_at - submission.started_at) / 60 : nil
+            col_info = [
+              submission.user_id,
+              submission.started_at.strftime('%Y-%m-%d %H:%M:%S'),
+              @context.name,
+              nil,
+              'quiz',
+              quiz.title,
+              quiz.quiz_type,
+              quiz.subject,
+              quiz.grade,
+              quiz.unit,
+              quiz.difficulty,
+              submission.submission_data,
+              submission.score,
+              duration
+            ]
+            col_info.each_with_index do |value, index|
+              set_value(sheet, index, row_num, value)
+            end
+            row_num += 1
+          end
+        end
+        send_data workbook.stream.read, filename: "gradebook.xlsx"
+      end
+    end
+  end
+
   private
+
+  def set_value(sheet, x, y, val)
+    column = sheet[y]
+    cell = sheet[y][x] if column.present?
+    if cell.present?
+      cell.change_contents(val, cell.formula)
+    else
+      sheet.add_cell(y, x, val)
+    end
+  end
 
   def valid_zip_upload_params?
     return true if params[:attachment_id].present?

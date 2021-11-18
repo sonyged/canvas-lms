@@ -214,6 +214,8 @@ class User < ActiveRecord::Base
 
   belongs_to :merged_into_user, class_name: 'User'
 
+  has_one :user_token, dependent: :destroy
+
   include StickySisFields
   are_sis_sticky :name, :sortable_name, :short_name, :pronouns
 
