@@ -88,6 +88,7 @@ class Quizzes::QuizQuestion::QuestionData
       question[:variables] = fields.fetch_any(:variables, [])
       question[:answer_tolerance] = fields.fetch_any(:answer_tolerance, nil)
       question[:formula_decimal_places] = fields.fetch_any(:formula_decimal_places, 0).to_i
+      question[:variable_constraints] = fields.fetch_any(:variable_constraints, '')
     elsif question.is_type?(:matching)
       question[:matching_answer_incorrect_matches] = fields.fetch_any(:matching_answer_incorrect_matches)
       question[:matches] = fields.fetch_any(:matches, [])

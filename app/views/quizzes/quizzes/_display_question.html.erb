@@ -245,6 +245,7 @@
               <% end %>
             </tbody>
           </table>
+          <div><label>Constraints:</label><span class="variable-constraints"><%= hash_get(question, :variable_constraints) %></span></div>
         </div>
       </div>
       <div class="formulas_holder calculated_question_answers" style="<%= hidden unless question && hash_get(question, :question_type) == 'calculated_question' %>">

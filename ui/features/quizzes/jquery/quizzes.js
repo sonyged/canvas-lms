@@ -684,6 +684,7 @@ export const quiz = (window.quiz = {
         $tr.append($td)
         $question.find('.variable_definitions_holder').css('display', '')
         $question.find('.variable_definitions tbody').append($tr)
+        $question.find('.variable-constraints').text(question.variable_constraints)
       })
       $.each(question.formulas, (i, formula) => {
         const $div = $('<div/>')
@@ -1787,6 +1788,7 @@ function quizData($question) {
         question.answers.push(answer)
       })
     } else {
+      question.variable_constraints = $question.find('.variable-constraints').text()
       question.formulas = []
       $question.find('.formulas_holder .formulas_list > div').each(function() {
         question.formulas.push($.trim($(this).text()))
@@ -1875,6 +1877,7 @@ function generateFormQuiz(quiz) {
     q.variables = question.variables
     q.answer_tolerance = question.answer_tolerance
     q.formula_decimal_places = question.formula_decimal_places
+    q.variable_constraints = question.variable_constraints
 
     q.answers = question.answers
     data.questions.push(q)
@@ -2704,7 +2707,6 @@ $(document).ready(function() {
       question.question_text = question.text_before_answers
       $form.fillFormData(question)
     }
-
     const data = quiz.updateFormQuestion($form)
     $form.find('.form_answers').empty()
     if (data.question_type == 'calculated_question') {
@@ -2724,6 +2726,7 @@ $(document).ready(function() {
         $th.text(question.variables[idx].name)
         $th.attr('id', 'possible_solution_' + question.variables[idx].name)
         $form.find('.combinations_holder .combinations thead tr').append($th)
+        $form.find('.variable-constraints').val(question.variable_constraints)
       }
       var $th = $("<th class='final_answer'/>")
       $th.text(I18n.t('final_answer', 'Final Answer'))
@@ -3963,6 +3966,7 @@ $(document).ready(function() {
       question.answers.push(data)
     })
     if ($question.hasClass('calculated_question')) {
+      question.variable_constraints = $question.find('.variable-constraints').val()
       question.answers = []
       question.variables = []
       const sorts = {}
@@ -5210,6 +5214,84 @@ $.fn.formulaQuestion = function() {
     const answer_tolerance = parseFloatOrPercentage(
       $question.find('.combination_answer_tolerance').val()
     )
+
+    function changeVariableByConstraints(variables, constraints) {
+      let hasUpdate = false;
+      for(let i = 0; i <= 100; i++) {
+        hasUpdate = false
+        // console.log('before', JSON.stringify(variables));
+        variables.forEach((variable, index) => {
+          constraints.forEach((constraint) => {
+            if (variable.name === constraint.var1) {
+              const var2 = variables.find((v) => v.name === constraint.var2);
+              if (!var2) {
+                alert("There is something wrong with variable constraints");
+                return;
+              }
+              const rule = constraint.rule;
+              if (rule === "=") {
+                if (variable.value !== var2.value) {
+                  hasUpdate = true;
+                  variable.value = var2.value;
+                }
+              }
+              if (rule === "!=") {
+                if (variable.value === var2.value) {
+                  hasUpdate = true;
+                  variable.value = variable.value + getRandomInt(variable.max - variable.min) + 1;
+                  if (variable.value > variable.max) { variable.value = variable.max }
+                }
+              }
+              if (rule === ">") {
+                if (variable.value <= var2.value) {
+                  hasUpdate = true;
+                  variable.value = var2.value + getRandomInt(variable.max - var2.value) + 1;
+                  if (variable.value > variable.max) { variable.value = variable.max }
+                }
+              }
+              if (rule === ">=") {
+                if (variable.value < var2.value) {
+                  hasUpdate = true;
+                  variable.value = var2.value + getRandomInt(variable.max - var2.value);
+                }
+              }
+              if (rule === "<") {
+                if (variable.value >= var2.value) {
+                  hasUpdate = true;
+                  variable.value = var2.value - getRandomInt(var2.value - variable.min) - 1;
+                  if (variable.value < variable.min) { variable.value = variable.min + 1 }
+                }
+              }
+              if (rule === "<=") {
+                if (variable.value > var2.value) {
+                  hasUpdate = true;
+                  variable.value = var2.value - getRandomInt(var2.value - variable.min);
+                }
+              }
+              if (rule === "=*") {
+                if (variable.value % var2.value !== 0) {
+                  hasUpdate = true;
+                  var2.value = var2.value - getRandomInt(2)
+                  if (var2.value < var2.min) var2.value = (var2.max + var2.min) / 2;
+                  let mul = getRandomInt(variable.max / var2.value) + 1;
+                  if (mul === 0) mul = 1;
+                  variable.value = var2.value * mul;
+                  if (variable.value > variable.max) { variable.value = var2.value * (mul - 1) }
+                }
+              }
+            }
+          });
+        });
+        if (!hasUpdate) break;
+      }
+      // console.log('after', JSON.stringify(variables));
+      return { variables, hasUpdate };
+    }
+
+    function getRandomInt(max) {
+      return Math.floor(Math.random() * max);
+    }
+
     var next = function() {
       $button.text(
         I18n.t('buttons.generating_combinations_progress', 'Generating... (%{done}/%{total})', {
@@ -5224,6 +5306,38 @@ $.fn.formulaQuestion = function() {
             .find('.variable_setting:first')
             .trigger('change', {cache: true})
         })
+        let variables = $variable_values.map(function () {
+          return {
+            name: $(this).attr("data-name"),
+            value: parseInt($(this).attr("data-value")),
+            min: $(this).data("cached_data").min,
+            max: $(this).data("cached_data").max,
+            target: $(this),
+          };
+        });
+        variables = Array.from(variables);
+        let constraintStr = $question.find(".variable-constraints").val().trim();
+        if (constraintStr === 'null') constraintStr = '';
+        const constraintRegex = /[<>=!\*]+/;
+        let constraints = constraintStr.split(",").map((constraint) => {
+          const rule = constraint.match(constraintRegex)[0];
+          const var1 = constraint.split(constraintRegex)[0].trim();
+          const var2 = constraint.split(constraintRegex)[1].trim();
+          return { var1, var2, rule, order: rule === '=*' ? 1 : 0 };
+        });
+        constraints = constraints.sort((a,b) => (a.order > b.order) ? -1 : ((b.order > a.order) ? 1 : 0))
+
+        const varChange = changeVariableByConstraints(variables, constraints)
+        if (varChange.hasUpdate) {
+          console.log('Can not find possible combination');
+          failedCount++;
+          break;
+        } else {
+          varChange.variables.forEach(variable => {
+            $(variable.target).attr('data-value', variable.value)
+          })
+        }
+
         $question.find('.supercalc').superCalc('recalculate', true)
         const result = $status.attr('data-res')
         const solution = new QuizFormulaSolution(result)

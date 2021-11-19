@@ -366,7 +366,6 @@ class Quizzes::QuizQuestionsController < ApplicationController
           @question.position = @group.quiz_questions.active.length
         end
       end
-
       guard_against_big_fields do
         @question.question_data = question_data
         @question.save
