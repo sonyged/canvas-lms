@@ -5268,7 +5268,7 @@ $.fn.formulaQuestion = function() {
                   variable.value = var2.value - getRandomInt(var2.value - variable.min);
                 }
               }
-              if (rule === "=*") {
+              if (rule === "=n*") {
                 if (variable.value % var2.value !== 0) {
                   hasUpdate = true;
                   var2.value = var2.value - getRandomInt(2)
@@ -5316,9 +5316,9 @@ $.fn.formulaQuestion = function() {
           };
         });
         variables = Array.from(variables);
-        let constraintStr = $question.find(".variable-constraints").val().trim();
+        let constraintStr = $question.find(".variable-constraints").val().trim().replaceAll(' ', '');
         if (constraintStr === 'null') constraintStr = '';
-        const constraintRegex = /[<>=!\*]+/;
+        const constraintRegex = /[<>=!(=n\*)]+/;
         let constraints = constraintStr.split(",").map((constraint) => {
           const rule = constraint.match(constraintRegex)[0];
           const var1 = constraint.split(constraintRegex)[0].trim();
