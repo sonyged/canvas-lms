@@ -5238,8 +5238,7 @@ $.fn.formulaQuestion = function() {
               if (rule === "!=") {
                 if (variable.value === var2.value) {
                   hasUpdate = true;
-                  variable.value = variable.value + getRandomInt(variable.max - variable.min) + 1;
-                  if (variable.value > variable.max) { variable.value = variable.max }
+                  variable.value = getRandomInt(variable.max - variable.min) + variable.min;
                 }
               }
               if (rule === ">") {
@@ -5268,15 +5267,13 @@ $.fn.formulaQuestion = function() {
                   variable.value = var2.value - getRandomInt(var2.value - variable.min);
                 }
               }
-              if (rule === "=n*") {
-                if (variable.value % var2.value !== 0) {
+              if (rule === "=*") {
+                if (variable.value % var2.value !== 0 || variable.value / var2.value < constraint.min || variable.value / var2.value > constraint.max) {
                   hasUpdate = true;
-                  var2.value = var2.value - getRandomInt(2)
-                  if (var2.value < var2.min) var2.value = (var2.max + var2.min) / 2;
-                  let mul = getRandomInt(variable.max / var2.value) + 1;
-                  if (mul === 0) mul = 1;
+                  var2.value = getRandomInt(var2.value - var2.min) + var2.min
+                  let mul = getRandomInt(constraint.max - constraint.min) + constraint.min;
+                  if (mul > Math.floor(variable.max / var2.value)) mul = Math.floor(variable.max / var2.value);
                   variable.value = var2.value * mul;
-                  if (variable.value > variable.max) { variable.value = var2.value * (mul - 1) }
                 }
               }
             }
@@ -5318,12 +5315,17 @@ $.fn.formulaQuestion = function() {
         variables = Array.from(variables);
         let constraintStr = $question.find(".variable-constraints").val().trim().replaceAll(' ', '');
         if (constraintStr === 'null') constraintStr = '';
-        const constraintRegex = /[<>=!(=n\*)]+/;
+        const constraintRegex = /[<>=!(=\(\d+-\d+\)\*)]+/;
         let constraints = constraintStr.split(",").map((constraint) => {
           const rule = constraint.match(constraintRegex)[0];
           const var1 = constraint.split(constraintRegex)[0].trim();
           const var2 = constraint.split(constraintRegex)[1].trim();
-          return { var1, var2, rule, order: rule === '=*' ? 1 : 0 };
+          if (rule.includes('*')) {
+            const range = rule.replace('=', '').replace('(', '').replace(')', '').replace('*', '').split('-').map(number => parseInt(number))
+            return { var1, var2, rule: '=*', order: 1, min: range[0], max: range[1]};
+          } else {
+            return { var1, var2, rule: rule, order: 0};
+          }
         });
         constraints = constraints.sort((a,b) => (a.order > b.order) ? -1 : ((b.order > a.order) ? 1 : 0))
 
