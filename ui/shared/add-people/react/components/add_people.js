@@ -24,6 +24,7 @@ import {CloseButton, Button} from '@instructure/ui-buttons'
 import {Heading} from '@instructure/ui-heading'
 import {Spinner} from '@instructure/ui-spinner'
 import {ScreenReaderContent} from '@instructure/ui-a11y-content'
+import axios from '@canvas/axios'
 import {
   courseParamsShape,
   apiStateShape,
@@ -104,7 +105,8 @@ export default class AddPeople extends React.Component {
 
     this.state = {
       currentPage: PEOPLESEARCH, // the page to render
-      focusToTop: false // move focus to the top of the panel
+      focusToTop: false, // move focus to the top of the panel,
+      isSubmitting: false,
     }
     this.content = null
   }
@@ -218,6 +220,31 @@ export default class AddPeople extends React.Component {
 
   peopleValidationIssuesOnBack = () => {
     this.goBack(PEOPLESEARCH, ['userValidationResult'])
+  }
+
+  submitCreateUsers = (e) => {
+    e.preventDefault()
+    this.setState({isSubmitting: true})
+    var formData = new FormData();
+    var fileInput = e.target.querySelector('input');
+    formData.append("users_csv", fileInput.files[0]);
+    axios.post(`/courses/${this.props.courseParams.courseId}/create_users`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    .then(response => {
+      this.setState({isSubmitting: false})
+      if (response.data.error) {
+        console.error(response.data.error)
+      } else {
+        window.location.reload()
+      }
+    })
+    .catch(err => {
+      console.error(err)
+      this.setState({isSubmitting: false})
+    })
   }
 
   // rendering -------------------------------------
@@ -359,6 +386,19 @@ export default class AddPeople extends React.Component {
             <ScreenReaderContent id="addpeople_panelDescription">
               {panelDescription}
             </ScreenReaderContent>
+            {
+              currentPage === PEOPLESEARCH ?
+              (
+                <form onSubmit={this.submitCreateUsers}>
+                  <div>Upload CSV file with headers name, email, password</div>
+                  <div>Password min length is 8</div>
+                  <div>
+                    <input type="file" name="users_csv" accept=".csv" required />
+                    <Button type="submit" disabled={this.state.isSubmitting}>Summit</Button>
+                  </div>
+                </form>
+              ) : null
+            }
             {currentPanel}
           </div>
         </Modal.Body>

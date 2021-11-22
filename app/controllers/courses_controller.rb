@@ -2360,10 +2360,50 @@ class CoursesController < ApplicationController
     end
   end
 
+  def create_users
+    get_context
+    if @current_user && @current_user.can_create_enrollment_for?(@context, session, params[:enrollment_type])
+      if params[:users_csv].blank?
+        flash[:error] = 'Missing csv file'
+        return redirect_to couse_path(@context)
+      end
+      enrollment_options = {
+        role: Role.find_by(base_role_type: 'StudentEnrollment'),
+        enrollment_type: 'StudentEnrollment',
+        course_section_id: @context.default_section.id,
+        limit_privileges_to_course_section: true,
+        updating_user: @current_user,
+      }
+      rows = CSV.foreach(params[:users_csv].path, headers: true).map(&:to_h)
+      begin
+        ActiveRecord::Base.transaction do
+          user_tokens = rows.map do |row|
+            user = User.new(:name => row['name'], :raw_password => row['password'])
+            cc = user.communication_channels.build(:path => row['email'], :path_type => 'email')
+            cc.user = user
+            user.root_account_ids = [@context.root_account.id]
+            user.workflow_state = 'creation_pending'
+            user.save!
+            user.token
+          end
+          if !@context.concluded? && (@enrollments = EnrollmentsFromUserList.process(user_tokens, @context, enrollment_options))
+            @enrollments.each do |enrollment|
+              activate_user(enrollment)
+            end
+          end
+        end
+      rescue => e
+        return render json: {error: e.message}
+      end
+      return render json: {}
+    else
+      authorized_action(@context, @current_user, :permission_fail)
+    end
+  end
+
   def enroll_users
     get_context
     params[:enrollment_type] ||= 'StudentEnrollment'
-
     custom_role = nil
     if params[:role_id].present? || !Role.get_built_in_role(params[:enrollment_type], root_account_id: @context.root_account_id)
       custom_role = @context.account.get_role_by_id(params[:role_id]) if params[:role_id].present?
@@ -3654,6 +3694,28 @@ class CoursesController < ApplicationController
   end
 
   private
+
+  def activate_user(enrollment)
+    user = enrollment.user
+    course = enrollment.course
+    cc = CommunicationChannel.unretired.find_by(user_id: user.id)
+    root_account = course.root_account
+    pseudonym = root_account.pseudonyms.build(:user => user, :unique_id => cc.path)
+    pseudonym.communication_channel = cc
+    pseudonym.password = user.raw_password
+    pseudonym.require_password = true
+    pseudonym.password_confirmation = pseudonym.password
+    pseudonym.communication_channel.pseudonym = pseudonym
+    user.require_acceptance_of_terms = false
+    user.time_zone = 'Tokyo'
+    user.subscribe_to_emails = '0'
+    user.save!
+    pseudonym.save!
+    if cc.confirm
+      enrollment.accept
+      user.register
+    end
+  end
 
   def update_grade_passback_setting(grade_passback_setting)
     valid_states = Setting.get('valid_grade_passback_settings', 'nightly_sync,disabled').split(',')
