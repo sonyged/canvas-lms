@@ -107,6 +107,7 @@ export default class AddPeople extends React.Component {
       currentPage: PEOPLESEARCH, // the page to render
       focusToTop: false, // move focus to the top of the panel,
       isSubmitting: false,
+      errorMessage: null,
     }
     this.content = null
   }
@@ -224,7 +225,7 @@ export default class AddPeople extends React.Component {
 
   submitCreateUsers = (e) => {
     e.preventDefault()
-    this.setState({isSubmitting: true})
+    this.setState({isSubmitting: true, errorMessage: null})
     var formData = new FormData();
     var fileInput = e.target.querySelector('input');
     formData.append("users_csv", fileInput.files[0]);
@@ -237,6 +238,7 @@ export default class AddPeople extends React.Component {
       this.setState({isSubmitting: false})
       if (response.data.error) {
         console.error(response.data.error)
+        this.setState({errorMessage: response.data.error})
       } else {
         window.location.reload()
       }
@@ -396,6 +398,7 @@ export default class AddPeople extends React.Component {
                     <input type="file" name="users_csv" accept=".csv" required />
                     <Button type="submit" disabled={this.state.isSubmitting}>Summit</Button>
                   </div>
+                  {this.state.errorMessage  ? <div style={{fontWeight: 'bold', color: 'red'}}>{this.state.errorMessage}</div> : null}
                 </form>
               ) : null
             }
