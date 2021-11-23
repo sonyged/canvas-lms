@@ -72,7 +72,7 @@ export default class CourseImageSelector extends React.Component {
       <div>
         <div
           className={`CourseImageSelector ${this.props.wide ? 'wide' : ''}`}
-          style={this.state.imageUrl ? {backgroundImage: `url(${this.state.imageUrl})`} : {}}
+          style={this.state.imageUrl ? {backgroundImage: `url(${this.state.imageUrl})`, position: 'relative'} : {position: 'relative'}}
         >
           {this.state.gettingImage || this.state.removingImage ? (
             <div className="CourseImageSelector__Overlay">
