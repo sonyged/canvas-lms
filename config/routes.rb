@@ -220,6 +220,7 @@ CanvasRails::Application.routes.draw do
     get 'details' => 'courses#settings'
     post :re_send_invitations
     post :enroll_users
+    post :create_users
     post :link_enrollment
     post :update_nav
     resource :gradebook do

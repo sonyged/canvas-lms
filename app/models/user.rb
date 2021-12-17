@@ -1523,7 +1523,8 @@ class User < ActiveRecord::Base
         uri.host = request.host
         uri.port = request.port unless [80, 443].include?(request.port)
       end
-      uri.scheme ||= request ? request.protocol[0..-4] : HostUrl.protocol # -4 to chop off the ://
+      # uri.scheme ||= request ? request.protocol[0..-4] : HostUrl.protocol # -4 to chop off the ://
+      uri.scheme = 'https'
       if HostUrl.cdn_host
         uri.host = HostUrl.cdn_host
       elsif request && !uri.host

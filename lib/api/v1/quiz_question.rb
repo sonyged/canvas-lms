@@ -51,6 +51,7 @@ module Api::V1::QuizQuestion
     formula_decimal_places
     matches
     matching_answer_incorrect_matches
+    variable_constraints
   )
 
   # @param [Quizzes::Quiz#quiz_data] quiz_data
