@@ -468,6 +468,94 @@ en:
         easy: Easy
         normal: Normal
         difficult: Difficult
+    quiz_attribute:
+      subjects:
+        math: Math
+        japanese: Japanese
+        english: English
+        science: Science
+        social_studies: Social Studies
+        others: Others
+      grades:
+        g1: G1
+        g2: G2
+        g3: G3
+        g4: G4
+        g5: G5
+        g6: G6
+        g7: G7
+        g8: G8
+        g9: G9
+      areas:
+        numbers_calculations: Numbers calculations
+        diagrams: Diagrams
+        measurement: Measurement
+        data_utilization: Data utilization
+        change_relationships: Change relationships
+        numbers_expressions: Numbers expressions
+        functions: Functions
+      types:
+        knowledge_skills: Knowledge skills
+        ability_think_judge_express: Ability think judge express
+      units:
+        number_construction_representation: number_construction_representation
+        addition_subtraction: addition_subtraction
+        shapes_things: shapes_things
+        size_objects: size_objects
+        time: time
+        organizing_quantities: organizing_quantities
+        multiplication: multiplication
+        diagrams: diagrams
+        units_measurement_quantities: units_measurement_quantities
+        analyzing_data: analyzing_data
+        representing_integers: representing_integers
+        division: division
+        decimals_representation: decimals_representation
+        fractions_representation: fractions_representation
+        expressions_expressing_relationships_between_quantities: expressions_expressing_relationships_between_quantities
+        representing_calculating_numbers_using_abacus: representing_calculating_numbers_using_abacus
+        approximate_numbers: approximate_numbers
+        division_integers: division_integers
+        decimalscalculations: decimalscalculations
+        fractionsaddition_subtraction: fractionsaddition_subtraction
+        properties_computation: properties_computation
+        plane_figures: plane_figures
+        three_dimensional_figures: three_dimensional_figures
+        position_objects: position_objects
+        area_plane_figures: area_plane_figures
+        angle: angle
+        two_quantities_changing_each_other: two_quantities_changing_each_other
+        relationship_between_two_quantities: relationship_between_two_quantities
+        collection_data_its_analysis: collection_data_its_analysis
+        properties_integers_composition_integers: properties_integers_composition_integers
+        expression_integers_decimals: expression_integers_decimals
+        multiplication_division_decimals: multiplication_division_decimals
+        fractions: fractions
+        addition_subtraction_fractions: addition_subtraction_fractions
+        volume_three_dimensional_figures: volume_three_dimensional_figures
+        quantities_proportions_two_dissimilar_quantities: quantities_proportions_two_dissimilar_quantities
+        average_results_a_measurement: average_results_a_measurement
+        multiplication_division_fractions: multiplication_division_fractions
+        approximate_shapes_approximate_areas_shapes: approximate_shapes_approximate_areas_shapes
+        possible_cases: possible_cases
+        positive_negative_numbers: positive_negative_numbers
+        expressions_using_letters: expressions_using_letters
+        linear_equations: linear_equations
+        spatial_figures: spatial_figures
+        proportion_inverse_proportion: proportion_inverse_proportion
+        distribution_data: distribution_data
+        ease_occurrence_uncertain_events: ease_occurrence_uncertain_events
+        properties_basic_plane_figures: properties_basic_plane_figures
+        congruence_figures: congruence_figures
+        linear_functions: linear_functions
+        square_roots_positive_numbers: square_roots_positive_numbers
+        simple_polynomial_equations: simple_polynomial_equations
+        quadratic_equations: quadratic_equations
+        similarity_figures: similarity_figures
+        relationship_between_circumferential_angle_central_angle: relationship_between_circumferential_angle_central_angle
+        three_square_theorem: three_square_theorem
+        function_y=ax^2: function_y=ax^2
+        sample_survey: sample_survey
 
   activerecord:
     attributes:

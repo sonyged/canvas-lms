@@ -143,6 +143,8 @@ gem 'week_of_month', '1.2.5',
   github: 'instructure/week-of-month', ref: 'b3013639e9474f302b5a6f27e4e45313e8d24902'
 gem 'will_paginate', '3.3.0', require: false # required for folio-pagination
 gem 'rubyXL', '~> 3.4.18'
+gem 'globalize', '~> 5.3.0'
+gem 'globalize-accessors', '~> 0.3.0'
 
 # needs pin to satisfy varying requirements of google_drive and another gem
 gem 'faraday', '0.17.4'

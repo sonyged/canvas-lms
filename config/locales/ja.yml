@@ -27695,7 +27695,104 @@ ja:
         easy: 易しい
         normal: 普通
         difficult: 難しい
+    quiz_attribute:
+      subjects:
+        math: 算数/数学
+        japanese: 国語
+        english: 英語
+        science: 理科
+        social_studies: 社会
+        others: その他
+      grades:
+        g1: 小学1年
+        g2: 小学2年
+        g3: 小学3年
+        g4: 小学4年
+        g5: 小学5年
+        g6: 小学6年
+        g7: 中学1年
+        g8: 中学2年
+        g9: 中学3年
+      areas:
+        numbers_calculations: 数と計算
+        diagrams: 図形
+        measurement: 測定
+        data_utilization: データの活用
+        change_relationships: 変化と関係
+        numbers_expressions: 数と式
+        functions: 関数
+      types:
+        knowledge_skills: 知識・技能
+        ability_think_judge_express: 思考力・判断力・表現力
+      units:
+        number_construction_representation: 数の構成と表し方
+        addition_subtraction: 加法及び減法
+        shapes_things: 身の回りにあるものの形
+        size_objects: 身の回りのものの大きさ
+        time: 時刻
+        organizing_quantities: 数量の整理
+        multiplication: 乗法
+        diagrams: 図形
+        units_measurement_quantities: 量の単位と測定
+        time: 時刻と時間
+        analyzing_data: データの分析
+        representing_integers: 整数の表し方
+        division: 除法
+        decimals_representation: 小数とその表し方
+        fractions_representation: 分数とその表し方
+        expressions_expressing_relationships_between_quantities: 数量の関係を表す式
+        representing_calculating_numbers_using_abacus: そろばんを用いた数の表し方と計算
+        approximate_numbers: 概数
+        division_integers: 整数の除法
+        decimalscalculations: 小数とその計算
+        fractionsaddition_subtraction: 分数とその加法及び減法
+        properties_computation: 計算に関して成り立つ性質
+        plane_figures: 平面図形
+        three_dimensional_figures: 立体図形
+        position_objects: ものの位置
+        area_plane_figures: 平面図形の面積
+        angle: 角の大きさ
+        two_quantities_changing_each_other: 伴って変わる二つの数量
+        relationship_between_two_quantities: 二つの数量の関係
+        collection_data_its_analysis: データの収集とその分析
+        properties_integers_composition_integers: 整数の性質及び整数の構成
+        expression_integers_decimals: 整数及び小数の表し方
+        multiplication_division_decimals: 小数の乗法及び除法
+        fractions: 分数
+        addition_subtraction_fractions: 分数の加法及び減法
+        volume_three_dimensional_figures: 立体図形の体積
+        quantities_proportions_two_dissimilar_quantities: 異種の二つの量の割合として捉えられる数量
+        average_results_a_measurement: 測定した結果を平均する方法
+        multiplication_division_fractions: 分数の乗法及び除法
+        approximate_shapes_approximate_areas_shapes: 身の回りにある形の概形やおよその面積など
+        possible_cases: 起こり得る場合
+        positive_negative_numbers: 正の数と負の数
+        expressions_using_letters: 文字を用いた式
+        linear_equations: 一元一次方程式
+        spatial_figures: 空間図形
+        proportion_inverse_proportion: 比例，反比例
+        distribution_data: データの分布
+        ease_occurrence_uncertain_events: 不確定な事象の起こりやすさ
+        linear_equations: 連立二元一次方程式
+        properties_basic_plane_figures: 基本的な平面図形の性質
+        congruence_figures: 図形の合同
+        linear_functions: 一次関数
+        square_roots_positive_numbers: 正の数の平方根
+        simple_polynomial_equations: 簡単な多項式
+        quadratic_equations: 二次方程式
+        similarity_figures: 図形の相似
+        relationship_between_circumferential_angle_central_angle: 円周角と中心角の関係
+        three_square_theorem: 三平方の定理
+        function_y=ax^2: 関数y＝ax^2
+        sample_survey: 標本調査
 
+  quiz_quiz_attribute:
+    subject: 教科
+    grade: 学年
+    area: 領域
+    unit: 単元
+    type: 種別
+    sub_unit: 小単元
   activerecord:
     attributes:
       "quizzes/quiz":

@@ -352,7 +352,14 @@ class Quizzes::QuizzesController < ApplicationController
         :VALID_DATE_RANGE => CourseDateRange.new(@context),
         :HAS_GRADING_PERIODS => @context.grading_periods?,
         :MAX_NAME_LENGTH_REQUIRED_FOR_ACCOUNT => max_name_length_required_for_account,
-        :MAX_NAME_LENGTH => max_name_length
+        :MAX_NAME_LENGTH => max_name_length,
+        :subject_options => enum_options_for_select(QuizAttribute, :subject),
+        :grade_options => enum_options_for_select(QuizAttribute, :grade),
+        :area_options => enum_options_for_select(QuizAttribute, :area),
+        :unit_options => enum_options_for_select(QuizAttribute, :unit),
+        :type_options => enum_options_for_select(QuizAttribute, :type),
+        :sub_unit_options => QuizAttribute.preload(:translations).all.map(&:attributes),
+        :quiz_quiz_attributes => @quiz.quiz_quiz_attributes.map(&:to_hash)
       }
 
       if @context.grading_periods?
@@ -477,6 +484,9 @@ class Quizzes::QuizzesController < ApplicationController
       end
 
       cached_due_dates_changed = @quiz.update_cached_due_dates?(quiz_params[:quiz_type])
+
+      # update for quiz_quiz_attribute
+      @quiz.update!(params.require(:quiz).permit([quiz_quiz_attributes_attributes: [:id, :grade, :subject, :quiz_attribute_id, :_destroy]]))
 
       # TODO: API for Quiz overrides!
       respond_to do |format|
