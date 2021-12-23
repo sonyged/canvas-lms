@@ -17,7 +17,7 @@
  */
 
 import React from 'react'
-import { func, array, object, number, bool } from 'prop-types'
+import {func, array, object, number, bool} from 'prop-types'
 import I18n from 'i18n!quiz_quiz_attribute'
 
 export default class QuizQuizAttribute extends React.Component {
@@ -43,7 +43,7 @@ export default class QuizQuizAttribute extends React.Component {
       selectedSubUnitId: props.quizQuizAttribute.quiz_attribute_id || '',
       selectedArea: props.quizQuizAttribute.area || '',
       selectedUnit: props.quizQuizAttribute.unit || '',
-      selectedType: props.quizQuizAttribute.type || '',
+      selectedType: props.quizQuizAttribute.type || ''
     }
   }
 
@@ -63,7 +63,7 @@ export default class QuizQuizAttribute extends React.Component {
         <div>
           {this.renderSubjectOptions()}
           {this.renderGradeOptions()}
-          {(this.state.selectedSubject == 'math') && this.renderSubUnitSelection()}
+          {this.state.selectedSubject == 'math' && this.renderSubUnitSelection()}
           {this.renderDeleteButton()}
         </div>
       )
@@ -73,22 +73,23 @@ export default class QuizQuizAttribute extends React.Component {
   renderHiddenId() {
     if (this.props.quizQuizAttribute.id) {
       return (
-        <input type="hidden"
+        <input
+          type="hidden"
           value={this.props.quizQuizAttribute.id}
           name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][id]`}
-        >
-        </input>
+        />
       )
     }
   }
+
   renderHiddenDestroy() {
     if (this.props.quizQuizAttribute.id && this.props.deleted) {
       return (
-        <input type="hidden"
+        <input
+          type="hidden"
           value={this.props.deleted}
           name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][_destroy]`}
-        >
-        </input>
+        />
       )
     }
   }
@@ -98,21 +99,25 @@ export default class QuizQuizAttribute extends React.Component {
       <div className="control-group">
         <label className="control-label">{I18n.t('subject')}</label>
         <div className="controls">
-          <select name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][subject]`}
-            value={this.state.selectedSubject} onChange={this.handleSelectSubject}>
-            <option value="" label=" "></option>
-            {this.props.subjectOptions.map(subjectOption =>
+          <select
+            name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][subject]`}
+            value={this.state.selectedSubject}
+            onChange={this.handleSelectSubject}
+          >
+            <option value="" label=" " />
+            {this.props.subjectOptions.map(subjectOption => (
               <option key={subjectOption[1]} value={subjectOption[1]}>
                 {subjectOption[0]}
-              </option>)}
+              </option>
+            ))}
           </select>
         </div>
       </div>
     )
   }
 
-  handleSelectSubject = (event) => {
-    this.setState({ selectedSubject: event.target.value });
+  handleSelectSubject = event => {
+    this.setState({selectedSubject: event.target.value})
   }
 
   renderGradeOptions() {
@@ -120,21 +125,25 @@ export default class QuizQuizAttribute extends React.Component {
       <div className="control-group">
         <label className="control-label">{I18n.t('grade')}</label>
         <div className="controls">
-          <select name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][grade]`}
-            value={this.state.selectedGrade} onChange={this.handleSelectGrade}>
-            <option value="" label=" "></option>
-            {this.props.gradeOptions.map(gradeOption =>
+          <select
+            name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][grade]`}
+            value={this.state.selectedGrade}
+            onChange={this.handleSelectGrade}
+          >
+            <option value="" label=" " />
+            {this.props.gradeOptions.map(gradeOption => (
               <option key={gradeOption[1]} value={gradeOption[1]}>
                 {gradeOption[0]}
-              </option>)}
+              </option>
+            ))}
           </select>
         </div>
       </div>
     )
   }
 
-  handleSelectGrade = (event) => {
-    this.setState({ selectedGrade: event.target.value });
+  handleSelectGrade = event => {
+    this.setState({selectedGrade: event.target.value})
   }
 
   renderSubUnitSelection() {
@@ -154,23 +163,31 @@ export default class QuizQuizAttribute extends React.Component {
         <label className="control-label">{I18n.t('area', 'Area')}</label>
         <div className="controls">
           <select value={this.state.selectedArea} onChange={this.handleSelectArea}>
-            <option value="" label=" "></option>
-            {this.getAvailableArea().map(areaOption =>
+            <option value="" label=" " />
+            {this.getAvailableArea().map(areaOption => (
               <option key={areaOption[1]} value={areaOption[1]}>
                 {areaOption[0]}
-              </option>)}
+              </option>
+            ))}
           </select>
         </div>
       </div>
     )
   }
 
-  handleSelectArea = (event) => {
-    this.setState({ selectedArea: event.target.value, selectedUnit: '', selectedType: '', selectedSubUnitId: '' });
+  handleSelectArea = event => {
+    this.setState({
+      selectedArea: event.target.value,
+      selectedUnit: '',
+      selectedType: '',
+      selectedSubUnitId: ''
+    })
   }
 
   getAvailableArea() {
-    const allAvailableArea = this.getAvailableSubUnitOptions(['subject', 'grade']).map(subUnit => subUnit.area)
+    const allAvailableArea = this.getAvailableSubUnitOptions(['subject', 'grade']).map(
+      subUnit => subUnit.area
+    )
 
     return this.props.areaOptions.filter(areaOption => {
       if (allAvailableArea.includes(areaOption[1])) {
@@ -187,23 +204,26 @@ export default class QuizQuizAttribute extends React.Component {
         <label className="control-label">{I18n.t('unit', 'Unit')}</label>
         <div className="controls">
           <select value={this.state.selectedUnit} onChange={this.handleSelectUnit}>
-            <option value="" label=" "></option>
-            {this.getAvailableUnits().map(unitOption =>
+            <option value="" label=" " />
+            {this.getAvailableUnits().map(unitOption => (
               <option key={unitOption[1]} value={unitOption[1]}>
                 {unitOption[0]}
-              </option>)}
+              </option>
+            ))}
           </select>
         </div>
       </div>
     )
   }
 
-  handleSelectUnit = (event) => {
-    this.setState({ selectedUnit: event.target.value, selectedType: '', selectedSubUnitId: '' });
+  handleSelectUnit = event => {
+    this.setState({selectedUnit: event.target.value, selectedType: '', selectedSubUnitId: ''})
   }
 
   getAvailableUnits() {
-    const allAvailableUnits = this.getAvailableSubUnitOptions(['subject', 'grade', 'area']).map(subUnit => subUnit.unit)
+    const allAvailableUnits = this.getAvailableSubUnitOptions(['subject', 'grade', 'area']).map(
+      subUnit => subUnit.unit
+    )
 
     return this.props.unitOptions.filter(unitOption => {
       if (allAvailableUnits.includes(unitOption[1])) {
@@ -220,23 +240,29 @@ export default class QuizQuizAttribute extends React.Component {
         <label className="control-label">{I18n.t('type', 'Type')}</label>
         <div className="controls">
           <select value={this.state.selectedType} onChange={this.handleSelectType}>
-            <option value="" label=" "></option>
-            {this.getAvailableTypes().map(typeOption =>
+            <option value="" label=" " />
+            {this.getAvailableTypes().map(typeOption => (
               <option key={typeOption[1]} value={typeOption[1]}>
                 {typeOption[0]}
-              </option>)}
+              </option>
+            ))}
           </select>
         </div>
       </div>
     )
   }
 
-  handleSelectType = (event) => {
-    this.setState({ selectedType: event.target.value, selectedSubUnitId: '' });
+  handleSelectType = event => {
+    this.setState({selectedType: event.target.value, selectedSubUnitId: ''})
   }
 
   getAvailableTypes() {
-    const allAvailableTypes = this.getAvailableSubUnitOptions(['subject', 'grade', 'area', 'unit']).map(subUnit => subUnit.type)
+    const allAvailableTypes = this.getAvailableSubUnitOptions([
+      'subject',
+      'grade',
+      'area',
+      'unit'
+    ]).map(subUnit => subUnit.type)
 
     return this.props.typeOptions.filter(typeOption => {
       if (allAvailableTypes.includes(typeOption[1])) {
@@ -250,27 +276,39 @@ export default class QuizQuizAttribute extends React.Component {
   renderSubUnitOptions() {
     return (
       <div className="control-group">
-        <label className="control-label" htmlFor="quiz_subject">{I18n.t('sub_unit', 'Sub Unit')}</label>
+        <label className="control-label" htmlFor="quiz_subject">
+          {I18n.t('sub_unit', 'Sub Unit')}
+        </label>
         <div className="controls">
-          <select name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][quiz_attribute_id]`}
-            value={this.state.selectedSubUnitId} onChange={this.handleSelectSubUnit}>
-            <option value="" label=" "></option>
-            {this.getAvailableSubUnits().map(subUnitOption =>
+          <select
+            name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][quiz_attribute_id]`}
+            value={this.state.selectedSubUnitId}
+            onChange={this.handleSelectSubUnit}
+          >
+            <option value="" label=" " />
+            {this.getAvailableSubUnits().map(subUnitOption => (
               <option key={subUnitOption.id} value={subUnitOption.id}>
                 {subUnitOption.sub_unit}
-              </option>)}
+              </option>
+            ))}
           </select>
         </div>
       </div>
     )
   }
 
-  handleSelectSubUnit = (event) => {
-    this.setState({ selectedSubUnitId: event.target.value });
+  handleSelectSubUnit = event => {
+    this.setState({selectedSubUnitId: event.target.value})
   }
 
   getAvailableSubUnits() {
-    const allAvailableSubUnits = this.getAvailableSubUnitOptions(['subject', 'grade', 'area', 'unit', 'type']).map(subUnit => subUnit.id)
+    const allAvailableSubUnits = this.getAvailableSubUnitOptions([
+      'subject',
+      'grade',
+      'area',
+      'unit',
+      'type'
+    ]).map(subUnit => subUnit.id)
 
     return this.props.subUnitOptions.filter(subUnitOption => {
       if (allAvailableSubUnits.includes(subUnitOption.id)) {
@@ -305,10 +343,10 @@ export default class QuizQuizAttribute extends React.Component {
   renderDeleteButton() {
     return (
       <div className="control-group">
-        <label className="control-label"></label>
+        <label className="control-label" />
         <div className="controls">
           <button className="Button" type="button" onClick={this.props.onDeleteClick}>
-            <i className="icon-x" role="presentation"></i>
+            <i className="icon-x" role="presentation" />
             <span className="screenreader-only">Delete set of quiz attributes</span>
             <span aria-hidden="true">Delete</span>
           </button>

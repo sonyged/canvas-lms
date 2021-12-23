@@ -17,7 +17,7 @@
  */
 
 import React from 'react'
-import { array } from 'prop-types'
+import {array} from 'prop-types'
 import QuizQuizAttribute from './QuizQuizAttribute'
 
 export default class QuizAttributeSelection extends React.Component {
@@ -28,7 +28,7 @@ export default class QuizAttributeSelection extends React.Component {
     unitOptions: array.isRequired,
     typeOptions: array.isRequired,
     subUnitOptions: array.isRequired,
-    quizQuizAttributes: array.isRequired,
+    quizQuizAttributes: array.isRequired
   }
 
   constructor(props) {
@@ -43,19 +43,21 @@ export default class QuizAttributeSelection extends React.Component {
     return (
       <div>
         {this.state.quizQuizAttributes.map((attribute, index) => {
-          return <QuizQuizAttribute
-            key={index}
-            subjectOptions={this.props.subjectOptions}
-            gradeOptions={this.props.gradeOptions}
-            areaOptions={this.props.areaOptions}
-            unitOptions={this.props.unitOptions}
-            typeOptions={this.props.typeOptions}
-            subUnitOptions={this.props.subUnitOptions}
-            quizQuizAttribute={attribute}
-            deleted={attribute.deleted}
-            index={index}
-            onDeleteClick={this.onDeleteClick(index)}
-          />
+          return (
+            <QuizQuizAttribute
+              key={index}
+              subjectOptions={this.props.subjectOptions}
+              gradeOptions={this.props.gradeOptions}
+              areaOptions={this.props.areaOptions}
+              unitOptions={this.props.unitOptions}
+              typeOptions={this.props.typeOptions}
+              subUnitOptions={this.props.subUnitOptions}
+              quizQuizAttribute={attribute}
+              deleted={attribute.deleted}
+              index={index}
+              onDeleteClick={this.onDeleteClick(index)}
+            />
+          )
         })}
         {this.state.quizQuizAttributes.length < 3 && this.renderAddButton()}
       </div>
@@ -65,7 +67,7 @@ export default class QuizAttributeSelection extends React.Component {
   renderAddButton() {
     return (
       <button className="Button" type="button" onClick={this.handleClickAddButton}>
-        <i className="icon-plus" role="presentation"></i>
+        <i className="icon-plus" role="presentation" />
         <span className="screenreader-only">Add new set of quiz attributes</span>
         <span aria-hidden="true">Add quiz attributes</span>
       </button>
@@ -77,18 +79,18 @@ export default class QuizAttributeSelection extends React.Component {
   }
 
   handleClickAddButton = () => {
-    this.setState({ quizQuizAttributes: this.state.quizQuizAttributes.concat({ new: true }) })
+    this.setState({quizQuizAttributes: this.state.quizQuizAttributes.concat({new: true})})
   }
 
-  onDeleteClick = (index) => {
+  onDeleteClick = index => {
     return () => {
       const quizQuizAttributes = this.state.quizQuizAttributes
       if (quizQuizAttributes[index].id) {
         quizQuizAttributes[index].deleted = true
-        this.setState({ quizQuizAttributes: quizQuizAttributes })
+        this.setState({quizQuizAttributes})
       } else {
         quizQuizAttributes.splice(index, 1)
-        this.setState({ quizQuizAttributes: quizQuizAttributes })
+        this.setState({quizQuizAttributes})
       }
     }
   }
