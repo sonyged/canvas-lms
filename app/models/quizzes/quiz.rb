@@ -149,6 +149,10 @@ class Quizzes::Quiz < ActiveRecord::Base
   belongs_to :assignment_group
   belongs_to :root_account, class_name: 'Account'
   has_many :ignores, :as => :asset
+  has_many :quiz_quiz_attributes, dependent: :destroy
+  has_many :quiz_attributes, through: :quiz_quiz_attributes
+
+  accepts_nested_attributes_for :quiz_quiz_attributes, allow_destroy: true
 
   validates_length_of :description, :maximum => maximum_long_text_length, :allow_nil => true, :allow_blank => true
   validates_length_of :title, :maximum => maximum_string_length, :allow_nil => true

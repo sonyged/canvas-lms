@@ -6454,7 +6454,7 @@ en:
     - Fri
     - Sat
     abbr_month_names:
-    - 
+    -
     - Jan
     - Feb
     - Mar
@@ -6505,7 +6505,7 @@ en:
       short_with_weekday: "%a, %b %-d"
       weekday: "%A"
     month_names:
-    - 
+    -
     - January
     - February
     - March
@@ -20889,3 +20889,10 @@ en:
         video meetings directly within Canvas by adding a Zoom link
         in a Canvas Course, Course Announcement, Module, or via Calendar.
   zoom_tutorial_tray_5dcb7fc: Zoom Tutorial Tray
+  quiz_quiz_attribute:
+    subject: 教科
+    grade: 学年
+    area: 領域
+    unit: 単元
+    type: 種別
+    sub_unit: 小単元

@@ -61,6 +61,9 @@ import 'jquery-scroll-to-visible/jquery.scrollTo'
 import 'jqueryui/sortable'
 import 'jqueryui/tabs'
 import AssignmentExternalTools from '@canvas/assignments/react/AssignmentExternalTools'
+import QuizAttributeSelection from '../react/QuizAttributeSelection'
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 let dueDateList, overrideView, quizModel, sectionList, correctAnswerVisibility, scoreValidation
 
@@ -1975,12 +1978,24 @@ function toggleConditionalReleaseTab(quizType) {
   }
 }
 
+function renderQuizAttributes() {
+  ReactDOM.render(<QuizAttributeSelection subjectOptions={ENV.subject_options}
+    gradeOptions={ENV.grade_options}
+    areaOptions={ENV.area_options}
+    unitOptions={ENV.unit_options}
+    typeOptions={ENV.type_options}
+    subUnitOptions={ENV.sub_unit_options || []}
+    quizQuizAttributes={ENV.quiz_quiz_attributes}
+  />, document.getElementById('quiz-attribute-selection'));
+}
+
 $(document).ready(function() {
   quiz.init().updateDisplayComments()
   correctAnswerVisibility.init()
   scoreValidation.init()
   ipFilterValidation.init()
   renderDueDates()
+  renderQuizAttributes()
 
   if ($('#assignment_external_tools').length) {
     AssignmentExternalTools.attach(
