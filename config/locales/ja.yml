@@ -3264,7 +3264,7 @@ ja:
   assign_reviews_on_date_7e48ec50: レビュー割り当て日付
   assign_to_6b806cd9: 課題対象者：
   assign_to_95404a83: ～へ割り当てられました
-  assign_to_c46e21: 割り当てられる
+  assign_to_c46e21: 割り当て対象
   assigned_permissions_6f6fecb6: 割り当てられた許可
   assigned_roles_ace6c950: 割り当てられた役割
   assigned_to_count_af2e2548: "（）に目標を割り当て済み：%{count}"
@@ -3307,7 +3307,7 @@ ja:
       a_discussion_post: ディスカッションへの投稿
       a_file_upload: ファイルのアップロード
       a_media_recording: メディアに記録されたデータ
-      a_quiz: クイズ
+      a_quiz: 問題
       a_text_entry_box: テキスト入力ボックス
       a_website_url: "Web サイト URL"
       external_tool: 外部ツール
@@ -3573,7 +3573,7 @@ ja:
       more: その他のオプション
       multiple_due_dates: 複数の期日
       not_graded_type: 未採点
-      quiz_type: クイズ
+      quiz_type: 問題
       save: 保存
       saving: 保存しています...
     create_group:
@@ -3734,7 +3734,7 @@ ja:
     index_view:
       add_assignment: 課題
       add_group: グループ
-      add_quiz_lti: クイズ/テスト
+      add_quiz_lti: 問題/テスト
       assignments: 課題
       assignments_settings: 課題設定
       assignments_settings_screenreader: 課題設定
@@ -5036,7 +5036,7 @@ ja:
       assignment: 課題
       discussion: ディスカッション
       event: イベント
-      quiz: クイズ
+      quiz: 問題
     input_is_invalid_date: 入力された日付が無効です。
     loading_more_items: その他のアイテムを読み込んでいます。
     loading_undated_events: 日付のないイベントを読み込んでいます
@@ -5472,7 +5472,7 @@ ja:
   choose_a_color_or_course_nickname_for_course_2585e42c: "%{course}に色、またはコースニックネームを選択"
   choose_a_color_or_course_nickname_or_move_course_c_dd23f754: "%{course} コースの色またはコースのニックネームを選択するか、コースカードを移動する"
   choose_a_course_85ef72b9: コースを選択する
-  choose_a_course_home_page_8059c7b: "コースのホーム ページの選択"
+  choose_a_course_home_page_8059c7b: "コースのホームを選択する"
   choose_a_csv_file_to_upload_9644480c: "アップロードする CSV ファイルの選択:"
   choose_a_date_cd0263fe: 日付を選択してください
   choose_a_file_to_upload_a63bac0f: アップロードするファイルを選択します
@@ -5489,7 +5489,7 @@ ja:
   choose_attribute_to_add_866e128d: 追加するには属性を選択
   choose_course_home_page_d8642f9e: コースのホームページを選択
   choose_file_8d89ccab: ファイルを選択する
-  choose_home_page_80cef4ee: "ホーム ページの選択"
+  choose_home_page_80cef4ee: "ホームを選択する"
   choose_image_242f727e: 画像を選択
   choose_image_e5ee5d7a: 画像を選択
   choose_one_2c4277df: ひとつ選んでください
@@ -5752,7 +5752,7 @@ ja:
   collaborations_are_web_based_tools_to_work_collabo_6fa285b6: コラボレーションは、メモやグループ化された論文の作成などの作業を共同で行うためのWebベースのツールです。開始するには、講師に相談してください。
   collaborations_are_web_based_tools_to_work_collabo_8ae6dd38: コラボレーションは、ノートを取ったりグループ化された論文を書くといったタスクで共同作業するためのWebベースのツールです。コラボレーションアプリを追加して始めてください。
   collaborations_tutorial_tray_9219d9d: コラボレーションのチュートリアルトレイ
-  collapse_all_50275533: すべて折りたたみ
+  collapse_all_50275533: すべて折りたたむ
   collapse_all_modules_e092807c: すべてのモジュールを折りたたむ
   collapse_discussion_thread_52bab65a: ディスカッションスレッドを折りたたむ
   collapse_group_c2af7cad: グループの折りたたみ
@@ -6045,7 +6045,7 @@ ja:
       export_type: エクスポートのタイプ
       labels:
         course: コース
-        quiz: クイズ
+        quiz: 問題
       links:
         download: "%{date} からのコースをエクスポート:*ここをクリックしてダウンロード*"
         download_file_export: "%{date} からのファイル エクスポート: *ダウンロードするにはここをクリックします*"
@@ -6646,7 +6646,7 @@ ja:
       external_tools: 外部ツール
       external_urls: "外部 URL"
       files: ファイル
-      quizzes: クイズ
+      quizzes: 問題
       wiki_pages: "Wiki ページ"
     points_possible_short: "%{points} 点"
     prerequisites_message:
@@ -6685,7 +6685,7 @@ ja:
       external_tools: 外部ツール
       external_urls: "外部 URL"
       files: ファイル
-      quizzes: クイズ
+      quizzes: 問題
     points_possible_short: "%{points} 点"
     titles:
       add: モジュールの追加
@@ -6897,8 +6897,8 @@ ja:
   copy_this_module_item_to_a_course_790a0cf4: このモジュール項目をコースにコピーします...
   copy_this_module_to_a_course_ddd12cc7: このモジュールをコースにコピーします...
   copy_title_to_course_2a41a2f4: "%{title}をコースにコピー"
-  copy_to_64f8456b: コピー先...
-  copy_to_a5396a6f: コピー先...
+  copy_to_64f8456b: 別のコースに複製
+  copy_to_a5396a6f: 別のコースに複製
   copy_to_folder_32ecc3c3: フォルダへコピー
   copying_628a9607: コピー中・・・
   copyright_and_license_information_must_be_provided_5feffaf: ファイルを公開する前に著作権とライセンス情報をファイルに提供しなければなりません。
@@ -7981,14 +7981,14 @@ ja:
       headers:
         course_status: "コース ステータス"
       headings:
-        choose_home_page_title: "ホーム ページの選択"
+        choose_home_page_title: "ホームを選択する"
         confirm_unenroll: 登録解除の確認
         importing: このコースはインポートされています
         unpublished: このコースは未公開です
       importing: コースのコピー/移行が進行中です。一部のコンテンツが一時的に使用できない場合があります。
       license_notice: "このコースのコンテンツは %{license_type} 使用許諾の下で提供されています。このコースのコンテンツは、特に断りのない限り、この使用許諾の下にあるものと見なされます。"
       links:
-        choose_home_page: "ホーム ページの選択"
+        choose_home_page: "ホームを選択する"
         course_setup: コース設定のためのチェックリスト
         drop_course: このコースを中断
         import: 既存のコンテンツをインポートする
@@ -8045,10 +8045,10 @@ ja:
       number_of_assignments: 課題数
       number_of_submissions: 提出数
       page_title: コースの統計情報
-      quiz: クイズ
+      quiz: 問題
       quiz_questions: クイズ問題
       quiz_submissions: クイズへの提出物
-      quizzes: クイズ
+      quizzes: 問題
       submission_type: 提出物のタイプ
       tabs:
         assignments: 課題
@@ -8154,13 +8154,13 @@ ja:
     discussion_name: ディスカッション名
     file_to_upload: アップロードするファイル
     graded_quiz: 採点済みのクイズ
-    graded_survey: 採点済みのサーベイ
+    graded_survey: 採点済みの調査
     header_name: ヘッダ名
     link_title: "リンク タイトル"
     page_name: ページ名
-    practice_quiz: 練習クイズ
+    practice_quiz: 練習問題
     quiz_name: クイズ名
-    ungrded_survey: 未採点のサーベイ
+    ungrded_survey: 未採点の調査
     url: URL
   create_new_attempt_19c96c03: 新しい試行を作成する
   create_new_course_e3ef9cd0: 新しいコースを作成する
@@ -8238,7 +8238,7 @@ ja:
     plugins: プラグイン
     prior_users: 先行ユーザ
     question_banks: 問題バンク
-    quizzes: クイズ
+    quizzes: 問題
     registered_services: 登録済みサービス
     revisions: リビジョン
     rubrics: 注釈
@@ -10398,7 +10398,7 @@ ja:
   exit_d0c7b013: 終了する
   exit_theme_editor_9ddd41bb: テーマエディターを終了する
   expand_2f2fadbd: 展開
-  expand_all_bb64d2ea: すべて展開
+  expand_all_bb64d2ea: すべて展開する
   expand_all_modules_a7d79134: すべてのモジュールを展開
   expand_closed_caption_languages_2642db5b: クローズドキャプションの言語を展開する
   expand_collapse_lang_73edc33c: "展開/折りたたみ%{lang}"
@@ -11833,7 +11833,7 @@ ja:
   graded_discussion_a873bb3e: "課題用ディスカッション:"
   graded_on_submission_60ac3010: 提出時に採点済み
   graded_quiz_7fabdf1f: 採点済みのクイズ
-  graded_survey_c0f0c395: 採点済みのサーベイ
+  graded_survey_c0f0c395: 採点済みの調査
   grader_comments_visible_to_graders_turned_off_d2af5e9d: 採点者に見える採点者コメントはオフになっています
   grader_comments_visible_to_graders_turned_on_dca303c7: 採点者に見える採点者コメントはオンになっています
   grader_count_cannot_be_0_9228afe4: グレーダーカウントは0にはできません
@@ -12212,8 +12212,8 @@ ja:
       create_group: グループの作成
     category:
       actions:
-        collapse_all: すべて折りたたみ
-        expand_all: すべて展開
+        collapse_all: すべて折りたたむ
+        expand_all: すべて展開する
         load_all: 全受講生のリストを読み込み
         load_more: さらに読み込み
       buttons:
@@ -13899,7 +13899,7 @@ ja:
         external_tools: 外部ツール
         groups: 受講生グループ
         learning_outcomes: 学習成果
-        quizzes: クイズ
+        quizzes: 問題
         rubrics: 注釈
         syllabus_body: 要綱本文
         tool_profiles: ツールプロファイル
@@ -16462,7 +16462,7 @@ ja:
     learning_outcome_type: 学習成果
     module_type: モジュール
     quiz_question_type: クイズ問題
-    quiz_type: クイズ
+    quiz_type: 問題
     rubric_type: 注釈
     webct:
       course_not_found: "Blackboard コースが見つかりませんでした。"
@@ -16573,7 +16573,7 @@ ja:
     external_url: "外部 URL"
     file: ファイル
     page: ページ
-    quiz: クイズ
+    quiz: 問題
     sub_header: "サブ ヘッダ"
   module_items_cannot_be_unpublished_if_there_are_st_7a80507c: 学生の提出物がある場合、モジュール項目は非公開にすることはできません。
   module_last_to_first_8cdb7a8e: "モジュール - 最後から最後まで"
@@ -16612,7 +16612,7 @@ ja:
       external_url: "外部 URL"
       file: ファイル
       page: "コンテンツ ページ"
-      quiz: クイズ
+      quiz: 問題
       text_header: "テキスト ヘッダ"
     add_module_item_dialog:
       item_type: "タイプ:"
@@ -18929,7 +18929,7 @@ ja:
   posting_to_students_eaa57964: 受講生への掲示
   powerschool_a30f0bfc: パワースクール
   ppt_534cb87: PPT
-  practice_quiz_19a8505d: 練習クイズ
+  practice_quiz_19a8505d: 練習問題
   pre_processing_92865c1d: 前処理
   prefetch_user_ids_in_gradebook_b96521b0: "成績表でユーザー ID をあらかじめ読み込んでおく"
   prerequisite_completion_period_c562d63: 前提条件の完了期間
@@ -19492,8 +19492,8 @@ ja:
   qti_img_matching_question: インポートされた一致問題は両側に画像を含んでいますが、この形式はサポートされていません
   qti_img_matching_question_distractors: インポートされた一致問題は選択肢内に画像を含んでおり、さらにデストラクタも含んでいるため修正できませんでした
   qti_name: "QTI コンバータ"
-  question_9121487: 質問
-  question_answered: 解答済み
+  question_9121487: 設問
+  question_answered: あなたの答え
   question_bank:
     align_outcomes: 成果の整列
     already_bookmarked: 既にブックマークが付いています
@@ -19593,11 +19593,11 @@ ja:
   question_banks_courses_dd907ecf: 質問バンク（コース）
   question_banks_view_and_link_e6d9cde2: "問題バンク - 表示とリンク"
   question_banks_view_and_link_to_f1bca68b: "質問バンク - 表示とリンク"
-  question_f06476d1: 質問
+  question_f06476d1: 設問
   question_group_837b8014: 質問グループ
   question_mark_icon_d2bbd204: クエスチョンマークのアイコン
   question_unanswered: 未回答
-  questions_a955145c: 質問
+  questions_a955145c: 設問
   queued_d0e45c4b: キュー
   quickly_share_course_content_and_templates_with_te_1cf3dc6f: コースコンテンツとテンプレートを講師と素早く共有する
   quickly_share_course_content_and_templates_with_te_c70a5eeb: コースコンテンツとテンプレートを講師と素早く共有する
@@ -19609,12 +19609,12 @@ ja:
       regrade_options: "すでにクイズを終えている受講生に、再採点のオプションを選んでください。Canvasは、あなたがクイズを保存した後に (受講生のスコアに影響がある可能性があります)、すべての提出物を再採点します。"
       some_scores_reduced: "正しい回答に対してのみポイントを与える (*一部の受講生は減点される場合があります*)"
       update_question_without_regrading: 再評価せずに問題を更新する
-  quiz_40ee61b1: クイズ
+  quiz_40ee61b1: 問題
   quiz_assignment_overrides_cec1973b: クイズ割当の上書き
   quiz_attempts_whose_availability_dates_have_passed_b0d98829: 有効期限を過ぎたイズの試行は、延長時間が経過していなくても自動送信されます。
   quiz_availability_dates_that_pass_during_an_attemp_d6016ff0: 試行中に過ぎたクイズの利用可能日は、延長時間が経過していなくても自動送信されます。
   quiz_duplication_not_implemented_c1495585: クイズのコピーが実装されていません
-  quiz_e0dcce8f: クイズ
+  quiz_e0dcce8f: 問題
   quiz_extensions_d2550649: クイズの拡張
   quiz_failed_to_update_2b66fa4d: クイズの更新が失敗しました
   quiz_ip_address_filters_49a75ec8: "クイズ IP アドレス フィルタ"
@@ -19649,7 +19649,7 @@ ja:
       links:
         back_to_session_information: ログに戻る
         question: "質問%{position}"
-      questions: 質問
+      questions: 設問
     no_answer: 解答なし
     page_header: セッション情報
     question_answers:
@@ -19856,7 +19856,7 @@ ja:
     default_comments_on_wrong_match: ユーザの解答が一致しなかった場合の応答
     default_quesiton_name: 問題
     default_question_name: 問題
-    default_quiz_title: クイズ
+    default_quiz_title: 問題
     default_response_to_essay: 受講生が解答を提出した後、受講生に表示する応答
     default_response_to_file_upload: 受講生が解答を提出した後、受講生に表示する応答
     dismiss_notification: 解散
@@ -19888,9 +19888,9 @@ ja:
         files_removed: "%{display_name} は削除されました。"
     final_answer: 最終的な答え
     headers:
-      assignment_quizzes: 課題クイズ
-      practice_quizzes: 練習クイズ
-      surveys: サーベイ
+      assignment_quizzes: 課題
+      practice_quizzes: 練習問題
+      surveys: 調査
     index:
       buttons:
         publishing_quizzes: クイズを公開しています...
@@ -19902,13 +19902,13 @@ ja:
         removed: クイズが正常に削除されました。
       multiple_due_dates: 複数の日付
     index_view:
-      add_quiz: クイズ
+      add_quiz: 問題
       links:
         manage_question_banks: 問題バンクの管理
         publish_multiple_quizzes: 複数のクイズの公開
         settings: 設定
-      quizzes_title: クイズ
-      search_for_quiz: クイズの検索
+      quizzes_title: 問題
+      search_for_quiz: 問題の検索
       title_add_quiz: クイズを追加
     label:
       answer:
@@ -19997,8 +19997,8 @@ ja:
         invalid_quiz_type: クイズの種類は無効です
       question_name_counter: "問題 %{question_number}"
       types:
-        quiz: クイズ
-        survey: サーベイ
+        quiz: 問題
+        survey: 調査
     quiz_attempts_length_error: "クイズの試行は 3 桁に制限されています。受講生に無制限の試行を許可する場合は、左側の [複数回の試行を許可] ボックスをオンにしないでください"
     quiz_attempts_nan_error: クイズの試行は数値でのみ指定できます
     quiz_group:
@@ -20007,7 +20007,7 @@ ja:
         no_permissions: "ユーザにはクイズ グループ %{group_name} の問題バンクを参照する権限がありませんでした"
       question_group: 問題グループ
     quiz_item_group_view:
-      no_quizzes: クイズが見つかりません
+      no_quizzes: 問題がありません
       no_surveys: サーベイが見つかりません
     quiz_item_view:
       links:
@@ -20118,7 +20118,7 @@ ja:
         quiz_deleted: そのクイズは削除されました
         quiz_update_failed: クイズの更新が失敗しました
       fabulous_quizzes:
-        page_titles: クイズ
+        page_titles: 問題
       find_question_from_bank:
         already_added: この問題は既にクイズに含まれています
         bank_description: "%{bank_name}、%{n} 件の問題"
@@ -20290,7 +20290,7 @@ ja:
         unnamed_survey_results: "%{user} のサーベイ結果"
         view_log: ログの表示
       index:
-        page_titles: クイズ
+        page_titles: 問題
       invalid_ip:
         quiz_protected: このクイズは保護されており、特定の場所でのみ利用できます。現在ご利用のコンピュータが置かれている場所は、このクイズに参加できる正当な場所ではないようです。
         survey_protected: このサーベイは保護されており、特定の場所でのみ利用できます。現在ご利用のコンピュータが置かれている場所は、このサーベイに参加できる正当な場所ではないようです。
@@ -20400,7 +20400,7 @@ ja:
           ip_addresses: IPアドレスによってフィルターにかける
           ip_filter: "フィルタの IP アドレス"
           never_hide_results: 受講生にクイズの回答を表示
-          quiz_instructions: クイズの指示
+          quiz_instructions: 問題の説明
           quiz_notify: この問題が変更されたことをユーザに通知する
           quiz_score: スコア
           require_access_code: "アクセス コードを要求"
@@ -20474,7 +20474,7 @@ ja:
           expand_group: グループの展開
       question_list_right_side:
         headers:
-          questions: 質問
+          questions: 設問
       question_statistic:
         attempts:
           one: "%{count} 回の試行"
@@ -20498,7 +20498,7 @@ ja:
         headers:
           due: 期限
           points: 点数
-          questions: 質問
+          questions: 設問
           time_limit: 制限時間
         multiple_due_dates: 複数の期日
         no_due_date: 期日なし
@@ -20510,7 +20510,7 @@ ja:
         unlimited: 無制限
       quiz_edit_details:
         labels:
-          quiz_instructions: クイズの指示
+          quiz_instructions: 問題の説明
           quiz_score: スコア
       quiz_right_side:
         attempts_left:
@@ -20621,7 +20621,7 @@ ja:
           quiz_details: クイズの詳細情報
         labels:
           question_details: 問題の詳細情報の表示
-          quiz_instructions: クイズの指示
+          quiz_instructions: 問題の説明
         links:
           back_to_quiz_page: クイズのページに戻る
       refresh_quiz_after_popup:
@@ -20727,7 +20727,7 @@ ja:
         logged_out_of_canvas: "*Canvas からログアウトしています。*続行するにはログインしてください"
         login_required: ログインが必要
         not_saved: 保存されていません
-        quiz_instructions: クイズの指示
+        quiz_instructions: 問題の説明
       take_quiz_in_popup:
         headers:
           loading_in_lockdown: "Respondus LockDown Browser でのクイズの読み込み"
@@ -20756,7 +20756,7 @@ ja:
         partial: 部分的
         right: 正解
         unanswered: 未解答
-        you_answered: 解答済み
+        you_answered: あなたの答え
       buttons:
         already_published: 公開されました!
         publishing: 公開しています...
@@ -20822,7 +20822,7 @@ ja:
         submission_five_minutes_left: "このクイズは、5 分後に提出されます"
         submission_one_minute_left: "このクイズは、1 分後に提出されます"
         submission_thirty_minutes_left: "このクイズは、30 分後に提出されます"
-      question_answered: 解答済み
+      question_answered: あなたの答え
       question_unanswered: まだ解答していない
       saved_at: "クイズの保存場所: %{t}"
       saving: 保存しています...
@@ -20858,13 +20858,13 @@ ja:
     : "True"
   quizzes/quiz:
     submission_action_take_quiz: "サンプル数%{title}"
-  quizzes_7e598f57: クイズ
+  quizzes_7e598f57: 問題
   quizzes_and_question_banks_9b7569e3: クイズと問題バンク
   quizzes_are_not_yet_handled_in_the_new_assignments_3898536a: クイズは新しい課題フローではまだ処理されていません。レガシー作成クイズページに移動しますか？
   quizzes_index:
     headers:
-      assignment_quizzes: 課題クイズ
-      practice_quizzes: 練習クイズ
+      assignment_quizzes: 課題
+      practice_quizzes: 練習問題
       surveys: 調査
     toggle_message: クイズの表示/非表示の切り替え
   quizzes_index_menu_1ce11b54: クイズインデックスメニュー
@@ -20903,9 +20903,9 @@ ja:
     default_answer_comments: 受講生がこの解答を選択した場合の応答
     default_answer_comments_on_match: 受講生の解答がこの解答と一致した場合の応答
     default_comments_on_wrong_match: ユーザの解答が一致しなかった場合の応答
-    default_quesiton_name: 質問
-    default_question_name: 質問
-    default_quiz_title: クイズ
+    default_quesiton_name: 設問
+    default_question_name: 設問
+    default_quiz_title: 問題
     default_response_to_essay: 受講生が解答を提出した後、受講生に表示する応答
     default_response_to_file_upload: 受講生が解答を提出した後、受講生に表示する応答
     enter_answer_variable_above: "[ 上記に解答の変数を入力 ]"
@@ -20945,7 +20945,7 @@ ja:
       correct_answer: 正解
       message_text: "メッセージ テキスト"
       other_incorrect_matches: 不正解となる他の整合選択肢
-      possible_answer: 可能な解答
+      possible_answer: 解答候補
     loading_more_questions: その他の問題を読み込んでいます...
     loading_question: 問題を読み込んでいます...
     loading_question_banks: 問題バンクを読み込んでいます...
@@ -22284,9 +22284,9 @@ ja:
   send_this_module_item_to_another_user_14d4fd60: このモジュール項目を別のユーザーに送信します...
   send_this_module_to_another_user_50cb27c8: このモジュールを別のユーザーに送信します...
   send_title_to_user_d952e233: "%{title}をユーザーに送信"
-  send_to_7881bf0e: 送信先...
-  send_to_a879095e: 送信先：
-  send_to_b940900a: 送信先...
+  send_to_7881bf0e: 送信...
+  send_to_a879095e: 送信：
+  send_to_b940900a: 送信...
   send_to_ce05b460: 送信
   sending_bf324366: 送信しています...
   sending_message_75923692: メッセージを送信中
@@ -22969,7 +22969,7 @@ ja:
       new_topic_option: "[ 新しいトピック ]"
       options:
         assignments: 課題
-      quiz_item: クイズ
+      quiz_item: 問題
       quiz_notice: "この *モジュール* に関連付けるクイズを選択するか、\"新しいクイズ\" を選択してクイズを追加します。"
       quiz_select_label: "関連付けるクイズを選択するか、または [新しいクイズ] を選択して新しいクイズを追加します。"
       quiz_select_label_create: "関連付けるクイズを選択、または [クイズを作成] を選択して新しいクイズを追加します。"
@@ -23090,7 +23090,7 @@ ja:
         modules: モジュール
         modules_page: モジュール
         new_page: 新しいページへのリンク
-        quizzes: クイズ
+        quizzes: 問題
         syllabus: シラバス
         upload_file: 新しいファイルをアップロードする
         upload_image: 新しい画像をアップロードする
@@ -23104,7 +23104,7 @@ ja:
         nav:
           course: "コース ナビゲーション"
           group: "グループ ナビゲーション"
-        quizzes: クイズ
+        quizzes: 問題
         wiki_pages: ページ
       messages:
         loading: 読み込んでいます...
@@ -24181,7 +24181,7 @@ ja:
     people: メンバー
     profile: プロフィール
     qr_mobile_login: "モバイルログイン用の QR"
-    quizzes: クイズ
+    quizzes: 問題
     rubrics: 規定
     schedule: スケジュール
     settings: 設定
@@ -25958,7 +25958,7 @@ ja:
   ungraded_out_of_pointspossible_2d6d81da: "%{pointsPossible}から未採点"
   ungraded_pointspossible_e2f86bd9: "未採点/%{pointsPossible}"
   ungraded_submissions_44efb0ec: 未採点の提出物
-  ungraded_survey_ad7de790: 未採点のサーベイ
+  ungraded_survey_ad7de790: 未採点の調査
   unique_user_id_dfca1a7f: ユーザーID
   united_arab_emirates_971_649b3750: "アラブ首長国連邦 (+971)"
   united_arab_emirates_a71e57c6: アラブ首長国連邦
