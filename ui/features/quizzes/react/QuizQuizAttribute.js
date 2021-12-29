@@ -18,7 +18,7 @@
 
 import React from 'react'
 import {func, array, object, number, bool} from 'prop-types'
-import I18n from 'i18n!quiz_quiz_attribute'
+import I18n from 'i18n!quiz_attribute'
 
 export default class QuizQuizAttribute extends React.Component {
   static propTypes = {
@@ -63,7 +63,7 @@ export default class QuizQuizAttribute extends React.Component {
         <div>
           {this.renderSubjectOptions()}
           {this.renderGradeOptions()}
-          {this.state.selectedSubject == 'math' && this.renderSubUnitSelection()}
+          {this.state.selectedSubject === 'math' && this.renderSubUnitSelection()}
           {this.renderDeleteButton()}
         </div>
       )
@@ -97,7 +97,7 @@ export default class QuizQuizAttribute extends React.Component {
   renderSubjectOptions() {
     return (
       <div className="control-group">
-        <label className="control-label">{I18n.t('subject')}</label>
+        <label className="control-label">{I18n.t('subject', 'Subject')}</label>
         <div className="controls">
           <select
             name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][subject]`}
@@ -123,7 +123,7 @@ export default class QuizQuizAttribute extends React.Component {
   renderGradeOptions() {
     return (
       <div className="control-group">
-        <label className="control-label">{I18n.t('grade')}</label>
+        <label className="control-label">{I18n.t('grade', 'Grade')}</label>
         <div className="controls">
           <select
             name={`quiz[quiz_quiz_attributes_attributes][${this.props.index}][grade]`}
@@ -348,7 +348,7 @@ export default class QuizQuizAttribute extends React.Component {
           <button className="Button" type="button" onClick={this.props.onDeleteClick}>
             <i className="icon-x" role="presentation" />
             <span className="screenreader-only">Delete set of quiz attributes</span>
-            <span aria-hidden="true">Delete</span>
+            <span aria-hidden="true">{I18n.t('delete', 'Delete')}</span>
           </button>
         </div>
       </div>

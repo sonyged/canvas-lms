@@ -11070,6 +11070,7 @@ ja:
   generate_epub_80e89ea4: ePubを生成
   generate_item_analysis_report_statuslabel_16e02c8: "アイテム分析レポートの生成%{statusLabel}"
   generate_student_analysis_report_statuslabel_aecdc4dc: "受講生分析レポートの生成%{statusLabel}"
+  generate_url_for_student_884ce25d: URLの生成
   generated_f26ee56b: "生成:"
   generating_5b5e20f8: "生成中:"
   generating_c2aabc02: 生成しています...
@@ -19610,6 +19611,15 @@ ja:
       some_scores_reduced: "正しい回答に対してのみポイントを与える (*一部の受講生は減点される場合があります*)"
       update_question_without_regrading: 再評価せずに問題を更新する
   quiz_40ee61b1: 問題
+  quiz_attribute:
+    subject: 教科
+    grade: 学年
+    area: 領域
+    unit: 単元
+    type: 種別
+    sub_unit: 小単元
+    delete: 削除
+    add_quiz: タグを追加
   quiz_assignment_overrides_cec1973b: クイズ割当の上書き
   quiz_attempts_whose_availability_dates_have_passed_b0d98829: 有効期限を過ぎたイズの試行は、延長時間が経過していなくても自動送信されます。
   quiz_availability_dates_that_pass_during_an_attemp_d6016ff0: 試行中に過ぎたクイズの利用可能日は、延長時間が経過していなくても自動送信されます。
