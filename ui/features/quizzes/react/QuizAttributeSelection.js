@@ -19,6 +19,7 @@
 import React from 'react'
 import {array} from 'prop-types'
 import QuizQuizAttribute from './QuizQuizAttribute'
+import I18n from 'i18n!quiz_attribute'
 
 export default class QuizAttributeSelection extends React.Component {
   static propTypes = {
@@ -69,7 +70,7 @@ export default class QuizAttributeSelection extends React.Component {
       <button className="Button" type="button" onClick={this.handleClickAddButton}>
         <i className="icon-plus" role="presentation" />
         <span className="screenreader-only">Add new set of quiz attributes</span>
-        <span aria-hidden="true">Add quiz attributes</span>
+        <span aria-hidden="true">{I18n.t('add_quiz', 'Add quiz attributes')}</span>
       </button>
     )
   }
