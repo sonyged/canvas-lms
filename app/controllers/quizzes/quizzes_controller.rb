@@ -486,7 +486,7 @@ class Quizzes::QuizzesController < ApplicationController
       cached_due_dates_changed = @quiz.update_cached_due_dates?(quiz_params[:quiz_type])
 
       # update for quiz_quiz_attribute
-      @quiz.update!(params.require(:quiz).permit([quiz_quiz_attributes_attributes: [:id, :grade, :subject, :quiz_attribute_id, :_destroy]]))
+      @quiz.update!(params.require(:quiz).permit([:answer_type, quiz_quiz_attributes_attributes: [:id, :grade, :subject, :quiz_attribute_id, :_destroy]]))
 
       # TODO: API for Quiz overrides!
       respond_to do |format|

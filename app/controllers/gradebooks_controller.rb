@@ -1137,12 +1137,26 @@ class GradebooksController < ApplicationController
           'course',
           'module',
           'content type',
+          'content_ID',
           'content name',
           'quiz type',
-          'subject',
-          'grade',
-          'unit',
-          'difficulty',
+          'quiz_ID',
+          'answer_type',
+          'subject_1',
+          'grade_1',
+          'unit_1',
+          'type_1',
+          'subunit_1',
+          'subject_2',
+          'grade_2',
+          'unit_2',
+          'type_2',
+          'subunit_2',
+          'subject_3',
+          'grade_3',
+          'unit_3',
+          'type_3',
+          'subunit_3',
           'answer',
           'result',
           'duration',
@@ -1156,27 +1170,49 @@ class GradebooksController < ApplicationController
         row_num = 1
         @context.quizzes.each do |quiz|
           quiz.quiz_submissions.where(user_id: student_ids).each_with_index do |submission|
-            duration = (submission.finished_at && submission.started_at) ? (submission.finished_at - submission.started_at) / 60 : nil
-            col_info = [
-              submission.user_id,
-              submission.started_at.strftime('%Y-%m-%d %H:%M:%S'),
-              @context.name,
-              nil,
-              'quiz',
-              quiz.title,
-              quiz.quiz_type,
-              quiz.subject,
-              quiz.grade,
-              quiz.unit,
-              quiz.difficulty,
-              submission.submission_data,
-              submission.score,
-              duration
-            ]
-            col_info.each_with_index do |value, index|
-              set_value(sheet, index, row_num, value)
+            submission.quiz_data.each_with_index do |question, index|
+              duration = (submission.finished_at && submission.started_at) ? (submission.finished_at - submission.started_at) / 60 : nil
+
+              col_info = [
+                submission.user_id,
+                submission.started_at.strftime('%Y-%m-%d %H:%M:%S'),
+                @context.name,
+                quiz.context_module_tags.first&.context_module&.name,
+                'quiz',
+                quiz.id,
+                quiz.title,
+                quiz.quiz_type,
+                question['id'],
+                quiz.answer_type,
+              ]
+
+              quiz_attributes = quiz.quiz_attributes.first(3)
+              quiz_attributes = quiz_attributes.fill(nil, (quiz_attributes.length)..2)
+
+              quiz_attributes.each do |quiz_attribute|
+                col_info += [
+                  quiz_attribute&.subject,
+                  quiz_attribute&.grade,
+                  quiz_attribute&.unit,
+                  quiz_attribute&.type,
+                  quiz_attribute&.sub_unit
+                ]
+              end
+
+              submission_for_question = submission.submission_data.select {|e| e.is_a?(Hash) && e[:question_id] == question['id'] }.first
+              answer, result = get_answer_and_result(submission_for_question, question)
+
+              col_info += [
+                answer,
+                result,
+                duration
+              ]
+
+              col_info.each_with_index do |value, index|
+                set_value(sheet, index, row_num, value)
+              end
+              row_num += 1
             end
-            row_num += 1
           end
         end
         send_data workbook.stream.read, filename: "gradebook.xlsx"
@@ -1185,6 +1221,58 @@ class GradebooksController < ApplicationController
   end
 
   private
+
+  def get_answer_and_result(submission, question)
+    return ['', 'null'] if submission.blank?
+
+    if question[:question_type] == 'fill_in_multiple_blanks_question'
+      blank_ids = question[:answers].map { |a| a[:blank_id] }.uniq
+      answer = blank_ids.map { |blank_id| submission["answer_for_#{blank_id}".to_sym].try(:gsub, /,/, '\,') }.compact.join(',')
+      result = submission[:correct] ? '1' : '0'
+      return [answer, result]
+
+    elsif question[:question_type] == 'multiple_answers_question'
+      answer = question[:answers].map { |a| submission["answer_#{a[:id]}".to_sym] == '1' ? a[:text].gsub(/,/, '\,') : nil }.compact.join(',')
+      result = submission[:correct] ? '1' : '0'
+      return [answer, result]
+
+    elsif question[:question_type] == 'multiple_dropdowns_question'
+      blank_ids = question[:answers].map { |a| a[:blank_id] }.uniq
+      answer_ids = blank_ids.map { |blank_id| submission["answer_for_#{blank_id}".to_sym] }
+      answer = answer_ids.map { |answer_id| (question[:answers].detect { |a| a[:id] == answer_id } || {})[:text].try(:gsub, /,/, '\,') }.compact.join(',')
+      result = submission[:correct] ? '1' : '0'
+      return [answer, result]
+
+    elsif question[:question_type] == 'calculated_question'
+      list = question[:answers].take(1).flat_map do |ans|
+        ans[:variables] && ans[:variables].map do |variable|
+          [variable[:name], variable[:value].to_s].map { |str| str.gsub(/\=>/, '\=>') }.join('=>')
+        end
+      end
+      list << submission[:text]
+      answer = list.map { |str| (str || '').gsub(/,/, '\,') }.join(',')
+      result = submission[:correct] ? '1' : '0'
+      return [answer, result]
+
+    elsif question[:question_type] == 'matching_question'
+      answer_ids = question[:answers].map { |a| a[:id] }
+      answer_and_matches = answer_ids.map { |id| [id, submission["answer_#{id}".to_sym].to_i] }
+      answer =  answer_and_matches.map { |id, match_id|
+        res = []
+        res << (question[:answers].detect { |a| a[:id] == id } || {})[:text]
+        match = question[:matches].detect { |m| m[:match_id] == match_id } || question[:answers].detect { |m| m[:match_id] == match_id } || {}
+        res << (match[:right] || match[:text])
+        res.map { |s| (s || '').gsub(/\=>/, '\=>') }.join('=>').gsub(/,/, '\,')
+      }.join(',')
+      result = submission[:correct] ? '1' : '0'
+      return [answer, result]
+
+    elsif question[:question_type] == 'numerical_question'
+      answer = submission && submission[:text]
+      result = submission[:correct] ? '1' : '0'
+      return [answer, result]
+    end
+  end
 
   def set_value(sheet, x, y, val)
     column = sheet[y]
