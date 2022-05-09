@@ -1227,19 +1227,19 @@ class GradebooksController < ApplicationController
 
     if question[:question_type] == 'fill_in_multiple_blanks_question'
       blank_ids = question[:answers].map { |a| a[:blank_id] }.uniq
-      answer = blank_ids.map { |blank_id| submission["answer_for_#{blank_id}".to_sym].try(:gsub, /,/, '\,') }.compact.join(',')
+      answer = blank_ids.map { |blank_id| submission["answer_for_#{blank_id}".to_sym] }.compact.join(',')
       result = submission[:correct] ? '1' : '0'
       return [answer, result]
 
     elsif question[:question_type] == 'multiple_answers_question'
-      answer = question[:answers].map { |a| submission["answer_#{a[:id]}".to_sym] == '1' ? a[:text].gsub(/,/, '\,') : nil }.compact.join(',')
+      answer = question[:answers].map { |a| submission["answer_#{a[:id]}".to_sym] == '1' ? a[:text] : nil }.compact.join(',')
       result = submission[:correct] ? '1' : '0'
       return [answer, result]
 
     elsif question[:question_type] == 'multiple_dropdowns_question'
       blank_ids = question[:answers].map { |a| a[:blank_id] }.uniq
       answer_ids = blank_ids.map { |blank_id| submission["answer_for_#{blank_id}".to_sym] }
-      answer = answer_ids.map { |answer_id| (question[:answers].detect { |a| a[:id] == answer_id } || {})[:text].try(:gsub, /,/, '\,') }.compact.join(',')
+      answer = answer_ids.map { |answer_id| (question[:answers].detect { |a| a[:id] == answer_id } || {})[:text] }.compact.join(',')
       result = submission[:correct] ? '1' : '0'
       return [answer, result]
 
@@ -1250,7 +1250,7 @@ class GradebooksController < ApplicationController
         end
       end
       list << submission[:text]
-      answer = list.map { |str| (str || '').gsub(/,/, '\,') }.join(',')
+      answer = list.map { |str| (str || '') }.join(',')
       result = submission[:correct] ? '1' : '0'
       return [answer, result]
 
@@ -1262,7 +1262,7 @@ class GradebooksController < ApplicationController
         res << (question[:answers].detect { |a| a[:id] == id } || {})[:text]
         match = question[:matches].detect { |m| m[:match_id] == match_id } || question[:answers].detect { |m| m[:match_id] == match_id } || {}
         res << (match[:right] || match[:text])
-        res.map { |s| (s || '').gsub(/\=>/, '\=>') }.join('=>').gsub(/,/, '\,')
+        res.map { |s| (s || '').gsub(/\=>/, '\=>') }.join('=>')
       }.join(',')
       result = submission[:correct] ? '1' : '0'
       return [answer, result]
@@ -1271,6 +1271,11 @@ class GradebooksController < ApplicationController
       answer = submission && submission[:text]
       result = submission[:correct] ? '1' : '0'
       return [answer, result]
+    else
+      answer_item = question && question[:answers]&.detect { |a| a[:id] == submission[:answer_id] }
+      answer_item ||= submission
+      result = submission[:correct] ? '1' : '0'
+      return [(answer_item && answer_item[:text]) || '', result]
     end
   end
 
