@@ -149,5 +149,15 @@ module Types
     def learning_outcome_group(id:)
       GraphQLNodeLoader.load("LearningOutcomeGroup", id, context)
     end
+
+    field :list_correct_answers, [Types::QuizSubmissionType], null: true do
+      argument :id, ID, "a graphql or legacy id", required: true
+    end
+    def list_correct_answers(id:)
+      comm_channel = CommunicationChannel.email.active.by_path(id).first
+      return if comm_channel.blank?
+      user = comm_channel.user
+      user.quiz_submissions
+    end
   end
 end
