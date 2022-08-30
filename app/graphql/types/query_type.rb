@@ -154,9 +154,9 @@ module Types
       argument :id, ID, "a graphql or legacy id", required: true
     end
     def list_correct_answers(id:)
-      comm_channel = CommunicationChannel.email.active.by_path(id).first
-      return if comm_channel.blank?
-      user = comm_channel.user
+      pseudonym = Pseudonym.active.by_unique_id(id).first
+      return if pseudonym.blank?
+      user = pseudonym.user
       user.quiz_submissions
     end
   end
