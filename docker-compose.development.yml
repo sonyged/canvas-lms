@@ -1,0 +1,9 @@
+# See doc/docker/README.md or https://github.com/instructure/canvas-lms/tree/master/doc/docker
+version: '2.3'
+services:
+  web:
+    tty: true
+    stdin_open: true
+    ports:
+      - 3000:3000
+    command: ["rails", "server", "-p", "3000", "-b", "0.0.0.0"]

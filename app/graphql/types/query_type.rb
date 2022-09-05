@@ -149,5 +149,15 @@ module Types
     def learning_outcome_group(id:)
       GraphQLNodeLoader.load("LearningOutcomeGroup", id, context)
     end
+
+    field :list_correct_answers, [Types::QuizSubmissionType], null: true do
+      argument :id, ID, "a graphql or legacy id", required: true
+    end
+    def list_correct_answers(id:)
+      pseudonym = Pseudonym.active.by_unique_id(id).first
+      return if pseudonym.blank?
+      user = pseudonym.user
+      user.quiz_submissions
+    end
   end
 end
