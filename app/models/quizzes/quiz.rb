@@ -1296,6 +1296,16 @@ class Quizzes::Quiz < ActiveRecord::Base
                        purpose: purpose).where('asset_id=quizzes.id'))
   }
 
+  scope :by_grade_attribute, lambda { |grade|
+    return if grade.blank?
+    joins(:quiz_quiz_attributes).where(quiz_quiz_attributes: {grade: grade})
+  }
+
+  scope :by_subject_attribute, lambda { |subject|
+    return if subject.blank?
+    joins(:quiz_quiz_attributes).where(quiz_quiz_attributes: {subject: subject})
+  }
+
   def peer_reviews_due_at
     nil
   end

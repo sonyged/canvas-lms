@@ -151,13 +151,21 @@ module Types
     end
 
     field :list_correct_answers, [Types::QuizSubmissionType], null: true do
-      argument :id, ID, "a graphql or legacy id", required: true
+      argument :login_id, ID, "a graphql or legacy id", required: true
+      argument :grade, Types::QuizAttributeGradeType, "an enum between g1 g2 g3 g4 g5 g6 g7 g8 g9", required: false
+      argument :subject, Types::QuizAttributeSubjectType, "an enum between math japanese english science social_studies others", required: false
+      argument :course_id, String, "a graphql or legacy id", required: false,
+        prepare: GraphQLHelpers.relay_or_legacy_id_prepare_func("Course")
     end
-    def list_correct_answers(id:)
-      pseudonym = Pseudonym.active.by_unique_id(id).first
+    def list_correct_answers(login_id:, grade: nil, subject: nil, course_id: nil)
+      pseudonym = Pseudonym.active.by_unique_id(login_id).first
       return if pseudonym.blank?
       user = pseudonym.user
-      user.quiz_submissions
+      quiz_submissions = user.quiz_submissions
+      quiz_submissions = quiz_submissions.by_grade_attribute(grade) if grade.present?
+      quiz_submissions = quiz_submissions.by_subject_attribute(subject) if subject.present?
+      quiz_submissions = quiz_submissions.for_course(course_id) if course_id.present?
+      quiz_submissions.order(id: :DESC)
     end
   end
 end

@@ -793,6 +793,16 @@ class Quizzes::QuizSubmission < ActiveRecord::Base
   # Excludes teacher preview and Student View submissions.
   scope :for_students, ->(quiz) { not_preview.for_user_ids(quiz.context.all_real_student_ids) }
 
+  scope :by_grade_attribute, lambda { |grade|
+    return if grade.blank?
+    joins(:quiz).merge(Quizzes::Quiz.by_grade_attribute(grade))
+  }
+
+  scope :by_subject_attribute, lambda { |subject|
+    return if subject.blank?
+    joins(:quiz).merge(Quizzes::Quiz.by_subject_attribute(subject))
+  }
+
   def course_broadcast_data
     quiz.context&.broadcast_data
   end
