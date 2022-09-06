@@ -161,7 +161,7 @@ module Types
       pseudonym = Pseudonym.active.by_unique_id(login_id).first
       return if pseudonym.blank?
       user = pseudonym.user
-      quiz_submissions = user.quiz_submissions
+      quiz_submissions = user.quiz_submissions.completed
       quiz_submissions = quiz_submissions.by_grade_attribute(grade) if grade.present?
       quiz_submissions = quiz_submissions.by_subject_attribute(subject) if subject.present?
       quiz_submissions = quiz_submissions.for_course(course_id) if course_id.present?
