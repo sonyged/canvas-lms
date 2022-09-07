@@ -808,6 +808,11 @@ class Quizzes::QuizSubmission < ActiveRecord::Base
     joins(:quiz).merge(Quizzes::Quiz.for_course(course_id))
   }
 
+  scope :for_quiz, lambda { |quiz_id|
+    return if quiz_id.blank?
+    where(quiz_id: quiz_id)
+  }
+
   def course_broadcast_data
     quiz.context&.broadcast_data
   end
