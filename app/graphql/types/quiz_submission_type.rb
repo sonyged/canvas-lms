@@ -30,6 +30,18 @@ module Types
 
     global_id_field :id
 
+    field :quiz_id, String, "quiz_id", method: :quiz_id, null: true
+    field :user_id, String, "user_id", method: :user_id, null: true
+    field :score, String, "score", method: :score, null: true
+    field :kept_score, String, "kept_score", method: :kept_score, null: true
+    field :quiz_points_possible, String, "quiz_points_possible", method: :quiz_points_possible, null: true
+
+    field :all_correct, Boolean, null: false
+    def all_correct
+      return false if quiz_submission.kept_score.blank? || quiz_submission.quiz_points_possible.blank?
+      quiz_submission.kept_score == quiz_submission.quiz_points_possible
+    end
+
     field :submission_data, String, null: true
     def submission_data
       quiz_submission.submission_data.to_json
