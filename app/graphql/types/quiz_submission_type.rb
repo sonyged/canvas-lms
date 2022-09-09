@@ -30,11 +30,16 @@ module Types
 
     global_id_field :id
 
-    field :quiz_id, String, "quiz_id", method: :quiz_id, null: true
-    field :user_id, String, "user_id", method: :user_id, null: true
-    field :score, String, "score", method: :score, null: true
-    field :kept_score, String, "kept_score", method: :kept_score, null: true
-    field :quiz_points_possible, String, "quiz_points_possible", method: :quiz_points_possible, null: true
+    field :quiz_id, Integer, "quiz_id", method: :quiz_id, null: true
+    field :user_id, Integer, "user_id", method: :user_id, null: true
+    field :score, Integer, "score", method: :score, null: true
+    field :kept_score, Integer, "kept_score", method: :kept_score, null: true
+    field :quiz_points_possible, Integer, "quiz_points_possible", method: :quiz_points_possible, null: true
+
+    field :course_id, String, "course_id", method: :course_id, null: false
+    def course_id
+      quiz_submission.quiz.context_id
+    end
 
     field :all_correct, Boolean, null: false
     def all_correct

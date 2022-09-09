@@ -154,20 +154,18 @@ module Types
       argument :login_id, ID, "a graphql or legacy id", required: true
       argument :grade, Types::QuizAttributeGradeType, "an enum between g1 g2 g3 g4 g5 g6 g7 g8 g9", required: false
       argument :subject, Types::QuizAttributeSubjectType, "an enum between math japanese english science social_studies others", required: false
-      argument :course_id, String, "a graphql or legacy id", required: false,
-        prepare: GraphQLHelpers.relay_or_legacy_id_prepare_func("Course")
-      argument :quiz_id, String, "a graphql or legacy id", required: false,
-        prepare: GraphQLHelpers.relay_or_legacy_id_prepare_func("Quiz")
+      argument :course_ids, [Integer], "course ids", required: false
+      argument :quiz_ids, [Integer], "quiz ids", required: false
     end
-    def completed_quiz_submissions(login_id:, grade: nil, subject: nil, course_id: nil, quiz_id: nil)
+    def completed_quiz_submissions(login_id:, grade: nil, subject: nil, course_ids: nil, quiz_ids: nil)
       pseudonym = Pseudonym.active.by_unique_id(login_id).first
       return if pseudonym.blank?
       user = pseudonym.user
       quiz_submissions = user.quiz_submissions.completed
       quiz_submissions = quiz_submissions.by_grade_attribute(grade) if grade.present?
       quiz_submissions = quiz_submissions.by_subject_attribute(subject) if subject.present?
-      quiz_submissions = quiz_submissions.for_course(course_id) if course_id.present?
-      quiz_submissions = quiz_submissions.for_quiz(quiz_id) if quiz_id.present?
+      quiz_submissions = quiz_submissions.for_course(course_ids) if course_ids.present?
+      quiz_submissions = quiz_submissions.for_quiz(quiz_ids) if quiz_ids.present?
       quiz_submissions.order(id: :DESC)
     end
   end
