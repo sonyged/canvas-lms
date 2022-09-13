@@ -161,7 +161,7 @@ class AccessToken < ActiveRecord::Base
     if overwrite || !self.crypted_token
       self.token = CanvasSlug.generate(nil, TOKEN_SIZE)
 
-      self.expires_at = Time.now.utc + 1.hour if developer_key&.auto_expire_tokens
+      # self.expires_at = Time.now.utc + 1.hour if developer_key&.auto_expire_tokens
     end
   end
 
