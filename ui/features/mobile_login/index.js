@@ -25,6 +25,7 @@ const eventToBindTo = 'click'
 ready(() => {
   setupForgotPassword()
   setupParentSignup()
+  setupShowPassword()
 })
 
 function setupParentSignup() {
@@ -123,4 +124,19 @@ function ajax(options) {
   Object.keys(options.headers).forEach(name => xhr.setRequestHeader(name, options.headers[name]))
   xhr.send(options.data)
   return xhr
+}
+
+function setupShowPassword() {
+  const passwordField = document.querySelector('#password-field.password-field-container')
+  passwordField.querySelector('button.show-password').addEventListener('click', event => {
+    event.stopPropagation()
+    passwordField.classList.add('showed')
+    passwordField.querySelector('input.ic-Input').type = 'text'
+  })
+
+  passwordField.querySelector('button.hide-password').addEventListener('click', event => {
+    event.stopPropagation()
+    passwordField.classList.remove('showed')
+    passwordField.querySelector('input.ic-Input').type = 'password'
+  })
 }

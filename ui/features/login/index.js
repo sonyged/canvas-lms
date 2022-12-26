@@ -33,4 +33,19 @@ ready(() => {
     event.preventDefault()
     return switcher.switchToLogin()
   })
+  function setupShowPassword() {
+    const passwordField = document.querySelector('#password-field.password-field-container')
+    passwordField.querySelector('button.show-password').addEventListener('click', event => {
+      event.stopPropagation()
+      passwordField.classList.add('showed')
+      passwordField.querySelector('input.ic-Input').type = 'text'
+    })
+
+    passwordField.querySelector('button.hide-password').addEventListener('click', event => {
+      event.stopPropagation()
+      passwordField.classList.remove('showed')
+      passwordField.querySelector('input.ic-Input').type = 'password'
+    })
+  }
+  setupShowPassword()
 })
