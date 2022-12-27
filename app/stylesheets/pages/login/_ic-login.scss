@@ -402,3 +402,30 @@ body.body--login-confirmation {
   vertical-align: middle;
   margin-#{direction(right)}: $ic-sp;
 }
+
+.password-field-container {
+  position: relative;
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 38px;
+    border: none;
+    border-radius: 2px;
+    line-height: 38px;
+    padding: 0 9px;
+  }
+
+  .hide-password {
+    display: none;
+  }
+
+  &.showed .hide-password {
+    display: inherit;
+  }
+
+  &.showed .show-password {
+    display: none;
+  }
+}
