@@ -115,6 +115,7 @@ class Quizzes::Quiz < ActiveRecord::Base
     math_g9_y=ax^2
     math_g9_sample_survey]
   DIFFICULTIES = %w[easy normal difficult]
+  ANSWER_TYPES = %w[select short_answer]
 
   include Workflow
   include HasContentTags
@@ -135,6 +136,7 @@ class Quizzes::Quiz < ActiveRecord::Base
   enum grade: GRADES, _prefix: true
   enum unit: UNITS, _prefix: true
   enum difficulty: DIFFICULTIES, _prefix: true
+  enum answer_type: ANSWER_TYPES, _prefix: true
 
   has_many :quiz_questions, -> { order(:position) }, dependent: :destroy, class_name: 'Quizzes::QuizQuestion', inverse_of: :quiz
   has_many :quiz_submissions, :dependent => :destroy, :class_name => 'Quizzes::QuizSubmission'

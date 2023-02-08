@@ -77,6 +77,19 @@ content_is_locked = !!js_env.dig(:MASTER_COURSE_DATA, "is_master_course_child_co
           </div>
         </div>
 
+        <div class="control-group">
+          <label class="control-label" for="quiz_assignment_id"><%= t("Answer Type") %></label>
+          <div class="controls">
+            <select name="quiz[answer_type]" id="quiz_assignment_id">
+              <% Quizzes::Quiz.answer_types.keys.each do |type| %>
+                <option value='<%= type %>' <%= 'selected' if @quiz.answer_type == type %> >
+                  <%= I18n.t(type) %>
+                </option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+
         <div id="quiz-attribute-selection"></div>
 
         <div class="control-group" id="quiz_points_possible" style="<%= hidden unless @quiz.graded_survey? %>">
