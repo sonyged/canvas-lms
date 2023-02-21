@@ -1202,7 +1202,7 @@ class GradebooksController < ApplicationController
 
               submission_for_question = submission.submission_data.select {|e| e.is_a?(Hash) && e[:question_id] == question['id'] }.first
               answer, result = get_answer_and_result(submission_for_question, question)
-              score = submission.score
+              score = submission.kept_score
 
               col_info += [
                 answer,
