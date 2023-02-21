@@ -1160,6 +1160,7 @@ class GradebooksController < ApplicationController
           'answer',
           'result',
           'duration',
+          'content scores',
         ]
         headers.each_with_index do |label, i|
           set_value(sheet, i, 0, label)
@@ -1201,11 +1202,13 @@ class GradebooksController < ApplicationController
 
               submission_for_question = submission.submission_data.select {|e| e.is_a?(Hash) && e[:question_id] == question['id'] }.first
               answer, result = get_answer_and_result(submission_for_question, question)
+              score = submission.score
 
               col_info += [
                 answer,
                 result,
-                duration
+                duration,
+                score
               ]
 
               col_info.each_with_index do |value, index|
